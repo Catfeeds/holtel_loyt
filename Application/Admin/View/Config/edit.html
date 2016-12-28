@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!---head-->
+		<include file="Public/head"/>
+		<!---head-->
+	</head>
+<style>
+	.upload-img-box .upload-pre-item {
+	    padding: 1px;
+	    width: 120px;
+	    max-height: 120px;
+	    overflow: hidden;
+	    text-align: center;
+	    cursor: pointer;
+	    border: 1px solid #ccc;
+	    transition: all .3s linear;
+	}
+	img {
+	    max-width: 100%;
+	    border: 0 none;
+	}	
+</style>
+	<body>
+		
+		<!---nav-->
+		<include file="Public/nav"/>
+		<!---nav-->
+		<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				<!---sidebar-->
+					<include file="Public/sidebar"/>
+				<!---sidebar-->
+				</div>
+				<!--top-alert-->
+					<include file="Public/top-alert"/>
+				<!--top-alert-->
+					<div class="page-content">
+						<div class="page-header">
+							<h1>{$info['id']?'编辑':'新增'}配置</h1>
+						</div><!-- /.page-header -->
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+							<form class="form-horizontal js-ajax-form"  id="form"  action="{:U()}" method="post" role="form">
+								<div class="tabbable">
+							        <div class="tab-content">
+							          <div class="tab-pane active" id="A">
+											<fieldset>
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">配置标识：</label>
+													<div class="col-sm-9">
+														<input type="text"  name="name" value="{$info.name|default=''}" class="col-xs-10 col-sm-5">
+														<span class="help-inline">
+															<span class="middle"><code>（用于C函数调用，只能使用英文且不能重复）</code></span>
+														</span>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">配置标题：</label>
+													<div class="col-sm-9">
+														<input type="text" name="title" value="{$info.title|default=''}" class="col-xs-10 col-sm-5">
+														<span class="help-inline">
+															<span class="middle"><code>（用于后台显示的配置标题）</code></span>
+														</span>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">排序：</label>
+													<div class="col-sm-9">
+														<input type="text" name="sort" value="{$info.sort|default=0}" class="col-xs-10 col-sm-5">
+														<span class="help-inline">
+															<span class="middle"><code>（用于分组显示的顺序）</code></span>
+														</span>
+													</div>
+												</div>												
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">配置类型：</label>
+													<div class="col-sm-9">
+														<select name="type" id="data-type" class="col-xs-10 col-sm-5">
+															<volist name="Think.config.CONFIG_TYPE_LIST" id="type">
+																<option value="{$key}">{$type}</option>
+															</volist>
+														</select>
+														<span class="help-inline">
+															<span class="middle"><code>（系统会根据不同类型解析配置值）</code></span>
+														</span>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">配置分组：</label>
+													<div class="col-sm-9">
+														<select name="group" id="data-type" class="col-xs-10 col-sm-5">
+															<option value="0">不分组</option>
+															<volist name="Think.config.CONFIG_GROUP_LIST" id="group">
+																<option value="{$key}">{$group}</option>
+															</volist>
+														</select>
+														<span class="help-inline">
+															<span class="middle"><code>（配置分组 用于批量设置 不分组则不会显示在系统设置中）</code></span>
+														</span>
+													</div>
+												</div>												
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">配置值：</label>
+													<div class="col-sm-9">
+														<textarea name="value"  rows="5" class="col-xs-10 col-sm-5">{$info.value|default=''}</textarea>
+														<span class="help-inline">
+															<span class="middle"><code>（配置值）</code></span>
+														</span>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">配置项：</label>
+													<div class="col-sm-9">
+														<textarea name="extra"  rows="5" class="col-xs-10 col-sm-5">{$info.extra|default=''}</textarea>
+														<span class="help-inline">
+															<span class="middle"><code>（如果是枚举型 需要配置该项）</code></span>
+														</span>
+													</div>
+												</div>				
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">说明：</label>
+													<div class="col-sm-9">
+														<textarea name="remark"  rows="5" class="col-xs-10 col-sm-5">{$info.remark|default=''}</textarea>
+														<span class="help-inline">
+															<span class="middle"><code>（配置详细说明）</code></span>
+														</span>
+													</div>
+												</div>																															
+											</fieldset>
+							          </div>
+							        </div>
+							    </div>
+							    <div class="form-actions text-center">
+									<input type="hidden" name="id" value="{$info.id|default=''}">
+									<button class="btn btn-primary btn-sm ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+									<button class="btn btn-default btn-sm" onclick="javascript:history.back(-1);return false;">返 回</button>
+							    </div>
+							</form>
+
+								<!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div><!-- /.main-content -->
+
+				<!-- /#ace-settings-container -->
+				<include file="Public/setting"/>
+				<!-- /#ace-settings-container -->
+				
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!---footer-->
+		<include file="Public/footer"/>
+		<!---footer-->
+
+		<!-- page specific plugin scripts -->
+		<!-- ace scripts -->
+
+		<script src="__ASSETS_JS__/ace-elements.min.js"></script>
+		<script src="__ASSETS_JS__/ace.min.js"></script>
+
+		<!-- inline scripts related to this page -->
+		<script type="text/javascript" charset="utf-8">
+			Think.setValue("type", {$info.type|default=0});
+			Think.setValue("group", {$info.group|default=0});
+			//导航高亮
+			highlight_subnav('{:U('Config/index')}');
+		</script>
+</body>
+</html>

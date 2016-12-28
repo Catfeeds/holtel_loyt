@@ -1,0 +1,79 @@
+<extend name="Base/common"/>
+<block name="pageHeader">
+	 <link rel="stylesheet" href="__CSS__/news.css">
+</block>
+<block name="body">
+<div style="clear:both;"></div>
+	<div class="news">
+	    <div class="container column-content">
+	        <div class="row">
+	            <div class="col-xs-3 left-colum">
+	                <span><a href="">首页</a>&gt;<a href="">{$category['title']}</a>&gt;<a href=""><empty name="list_new_no_document">{$nowcategory.title}<else />{$maxid_no['title']}</empty></a></span>
+	                <ul>
+	                	<volist name="listnew" id="data">
+	               		     <!--<li><a href=""  class="">{$data.title}</a></li>-->
+							 <li><a href="{:U('Article/lists?category='.$category['name'].'&category_id='.$data['id'])}" class="<eq name="category_id" value="$data['id']">act</eq> <if condition="($maxid_no['id'] eq $data['id']) AND list_new_no_document">act</if>">{$data.title}</a></li>
+						</volist>
+	                </ul>
+	                <div class="left-next" style="padding:2px 0;border-bottom:1px dashed #d9d4d4;">
+	                    <p style="font-size:12px;">产品咨询 / 购买热线 <span style="color:red">400-6768-678</span></p>
+	                </div>
+	                <div class="row">
+	                    <div class="col-xs-4">
+	                         <img src="__IMG__/DownloadApp.png" alt="app下载" style="width:70px;height:70px;">
+	                    </div>
+	                    <div class="col-xs-8" style="border-bottom:1px dashed #d9d4d4;border-top:1px dashed #d9d4d4;">
+	                        <h4 style="font-weight:bold;">免费下载APP</h4>
+	                        <span style="padding:15px 0;color:red;">激情体验瓯宝智能家居</span>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="col-xs-9 solution-content">
+	            	<empty name="list_new_no_document">
+		            	<volist name="list_new_document" id="list_new">
+			                <div class="new-list">
+			                    <a href="{:U('Article/detail?id='.$list_new['id'])}"> 
+			                        <div class="date-block"> 
+			                         <span class="day">23</span>Dec<br>2015 </div>        
+			                         <div class="summary">            
+			                         <h1>{$list_new.title}</h1>          
+			                         <h3>发布者: 瓯宝&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;浏览次数: {$list_new.view}</h3>          
+			                             <p>{$list_new.description}</p>       
+			                        </div>   
+			                    </a>
+			                </div>
+						</volist>
+					<else /> 
+						<volist name="list_new_no_document" id="list_new_no">
+							<div class="new-list">
+			                    <a href="{:U('Article/detail?id='.$list_new_no['id'])}"> 
+			                        <div class="date-block"> 
+			                         <span class="day">23</span>Dec<br>2015 </div>        
+			                         <div class="summary">            
+			                         <h1>{$list_new_no.title}</h1>          
+			                         <h3>发布者: 瓯宝&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;浏览次数: {$list_new_no.view}</h3>          
+			                             <p>{$list_new_no.description}</p>       
+			                        </div>   
+			                    </a>
+			                </div>
+						 </volist>
+					</empty>
+	                <div style="clear:both;"></div>
+	                <div class="row">
+	                   <div class="col-xs-12">
+	                        <div class="page">
+	                            <a href="javascript:void(0);">上一页</a>
+	                            <a href="javascript:void(0);" class="style-page active">1</a>
+	                            <a href="javascript:void(0);" class="style-page">2</a>
+	                            <a href="javascript:void(0);" class="style-page">3</a>
+	                            <a href="javascript:void(0);">下一页</a>
+	                        </div> 
+	                    </div>
+	                </div>
+	            </div>  
+	      		</div>
+	            </div>  
+	        </div>
+	    </div>
+	</div>
+</block>

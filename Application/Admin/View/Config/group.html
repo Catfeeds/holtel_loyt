@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!---head-->
+		<include file="Public/head"/>
+		<!---head-->
+	</head>
+<style>
+	.upload-img-box .upload-pre-item {
+	    padding: 1px;
+	    width: 120px;
+	    max-height: 120px;
+	    overflow: hidden;
+	    text-align: center;
+	    cursor: pointer;
+	    border: 1px solid #ccc;
+	    transition: all .3s linear;
+	}
+	img {
+	    max-width: 100%;
+	    border: 0 none;
+	}	
+</style>
+	<body>
+		
+		<!---nav-->
+		<include file="Public/nav"/>
+		<!---nav-->
+		<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				<!---sidebar-->
+					<include file="Public/sidebar"/>
+				<!---sidebar-->
+				</div>
+				<!--top-alert-->
+				<include file="Public/top-alert"/>
+				<!--top-alert-->
+					<div class="page-content">
+						<div class="page-header">
+						</div><!-- /.page-header -->
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+							<ul class="nav nav-tabs">
+									<volist name="Think.config.CONFIG_GROUP_LIST" id="group">
+										<li <eq name="id" value="$key">class="active"</eq>><a href="{:U('?id='.$key)}">{$group}配置</a></li>
+									</volist>
+						    </ul>
+							<form action="{:U('save')}" method="post" class="form-horizontal" role="form">
+							<div class="tabbable">
+						    <div class="tab-content">
+							<volist name="list" id="config">
+								<fieldset>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right">{$config.title}：</label>
+									<div class="col-sm-9">
+									<switch name="config.type">
+									<case value="0">
+										<input type="text" class="col-xs-10 col-sm-5" name="config[{$config.name}]" value="{$config.value}">
+									</case>
+									<case value="1">
+										<input type="text" class="col-xs-10 col-sm-5" name="config[{$config.name}]" value="{$config.value}">
+									</case>
+									<case value="2">
+											<textarea name="config[{$config.name}]" rows="5" class="col-xs-10 col-sm-5">{$config.value}</textarea>
+									</case>
+									<case value="3">
+											<textarea name="config[{$config.name}]" rows="5" class="col-xs-10 col-sm-5">{$config.value}</textarea>
+									</case>
+									<case value="4">
+										<select name="config[{$config.name}]" class="col-xs-10 col-sm-5">
+											<volist name=":parse_config_attr($config['extra'])" id="vo">
+												<option value="{$key}" <eq name="config.value" value="$key">selected</eq>>{$vo}</option>
+											</volist>
+										</select>
+									</case>
+									</switch>
+										<notempty name="config['remark']">
+											<span class="help-inline">
+												<span class="middle"><code>（{$config.remark}）</code></span>
+											</span>
+										</notempty>										
+									</div>
+								</div>
+								</fieldset>
+								</volist>
+
+								</div>
+								</div>
+							<div class="form-actions text-center">
+									<label class="item-label"></label>
+									<div class="controls">
+										<empty name="list"><button type="submit" disabled class="btn submit-btn  btn-sm disabled" target-form="form-horizontal">确 定</button><else/><button type="submit" class="btn btn-primary btn-sm submit-btn ajax-post" target-form="form-horizontal">确 定</button></empty>
+										<button class="btn btn-return btn-sm" onclick="javascript:history.back(-1);return false;">返 回</button>
+									</div>
+								</div>
+							</form>
+								<!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div><!-- /.main-content -->
+
+				<!-- /#ace-settings-container -->
+				<include file="Public/setting"/>
+				<!-- /#ace-settings-container -->
+				
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!---footer-->
+		<include file="Public/footer"/>
+		<!---footer-->
+
+		<!-- page specific plugin scripts -->
+		<!-- ace scripts -->
+
+		<script src="__ASSETS_JS__/ace-elements.min.js"></script>
+		<script src="__ASSETS_JS__/ace.min.js"></script>
+
+		<!-- inline scripts related to this page -->
+		<script type="text/javascript">
+
+		</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<extend name="Base/common"/>
+<block name="body">
+<div style="clear:both;"></div>
+<div id="myCarousel" class="carousel slide">
+	<ol class="carousel-indicators">
+		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		<li data-target="#myCarousel" data-slide-to="1"></li>
+		<li data-target="#myCarousel" data-slide-to="2"></li>
+	</ol>
+	<div class="carousel-inner">
+		<div class="item active" style="background:#223240">
+			<a href="products.html"><img src="__IMG__/index.jpg" alt="第一张"></a>
+		</div>
+		<div class="item" style="background:#F5E4DC;">
+			<a href="products.html"><img src="__IMG__/product.jpg" alt="第二张"></a>
+		</div>
+		<div class="item" style="background:#DE2A2D;">
+		    <a href="products.html"><img src="__IMG__/process.jpg" alt="第三张"></a>
+		</div>
+		<!--<div style="background:#eee;">
+				<img src="__IMG__/slide.png" alt="第三张">
+			</div>
+		 -->
+	</div>
+	<a href="#myCarousel" data-slide="prev" class="carousel-control left">
+		<span class="glyphicon glyphicon-chevron-left"></span>
+	</a>
+	<a href="#myCarousel" data-slide="next" class="carousel-control right">
+		<span class="glyphicon glyphicon-chevron-right"></span>
+	</a>
+</div>
+
+<div style="clear:both"></div>
+<div class="content" >
+        <div class="container">
+           <div class="row">
+                <div class="col-xs-6 content-index">
+                    <p class="first-red"><span>a</span>bout</p>
+                    <div class="row title-header">
+                        <div class="col-xs-6 about">关于我们</div>
+                        <div class="col-xs-6 more"><a href="about.html">更多 +</a></div>
+                    </div>
+                    <div class="body">
+                       <p class="body-content">
+                            瓯宝安防科技股份有限公司自1987年成立以来，一直秉承着“以用户为核心”的理念，致力于智能家居的研发生产，是国内首家生产闭门器的股份制企业，也是国内最大的闭门器专业制造商。
+                        </p> 
+                        <p class="body-content">
+                            公司针对金融、公安、电讯、交通、司法、教育、电力、水利、军队等部门特点和要求提供了不同的产品及解决方案。我们的主要产品有：指纹锁、闭门器、电动闭门器、密码锁、智能锁、防尾随联动互锁系统、门禁系统等。在全球八十多个国家和地区均有销售。
+                        </p>   
+                    </div>
+                </div>
+                <div class="col-xs-6 content-news" style="margin-left:0;">
+                    <p class="first-red"><span>n</span>ews</p>
+                    <div class="row title-header">
+                        <div class="col-xs-6 about">新闻资讯</div>
+                        <div class="col-xs-6 more"><a href="news.html">更多 +</a></div>
+                    </div>
+                        <div class="row info-content" style="margin:0;">
+                                <div class="col-xs-3 col-xs-3 col-xs-3">
+                                    <a href="news_info.html"><img src="__IMG__/new1.jpg" class="img-responsive new-img" alt=""></a>
+                                </div>
+                                <div class="col-xs-9 col-xs-9 col-xs-9" style="padding:0;">
+                                    <a href="news_info.html"><h4>智慧生活，无限精彩，瓯宝2015深圳安博会完美收官</h4></a>
+                                    <a href="news_info.html"><p class="hidden-xs">2015年10月29日-11月1日，2015年第十五届中国国际公共安全博览会（简称安博会，英文缩写CPSE）在深圳会展中心.....</p></a>
+                                </div>
+                        </div>
+                    <div class="row info-content">
+                            <div class="col-xs-3 col-xs-3 col-xs-3">
+                                <a href="news_info.html"><img src="__IMG__/new1.jpg" class="img-responsive new-img" alt=""></a>
+                            </div>
+                            <div class="col-xs-9 col-xs-9 col-xs-9" style="padding:0;">
+                                <a href="news_info.html"><h4>智慧生活，无限精彩，瓯宝2015深圳安博会完美收官</h4></a>
+                                <a href="news_info.html"><p class="hidden-xs">2015年10月29日-11月1日，2015年第十五届中国国际公共安全博览会（简称安博会，英文缩写CPSE）在深圳会展中心.....</p></a>
+                            </div>
+					</div>             
+                </div>
+            </div>
+        </div>
+</div>
+<div style="clear:both"></div>
+<div class="tab2">
+	<div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-xs-12">
+               <p class="first-red"><span>P</span>roducts</p>
+               <p class="about">产品展示</p>
+            </div>
+        </div>
+     <div class="row">
+        <div id="myCar" class="carousel slide">    
+       <!-- <ol class="carousel-indicators">
+            <li data-target="#myCar" data-slide-to="0" class="active"></li>
+            <li data-target="#myCar" data-slide-to="1"></li>
+            <li data-target="#myCar" data-slide-to="2"></li>
+        </ol>-->  
+            <div class="col-xs-1 left">
+            <a href="#myCar" data-slide="prev">
+               <span class="glyphicon glyphicon-circle-arrow-left allow" style="font-size:40px;"></span>
+            </a>
+             </div>  
+            <div class="col-xs-10">
+                <ul>
+                   <div class="carousel-inner">
+                    <div class="item active">
+                        <li><a href="#"><img src="__IMG__/gas%20alarm.png" alt=""></a>
+                            <!--<p>智能遥控</p>-->
+                    
+                        </li>
+                        <li><a href="products_info.html"><img src="__IMG__/outlet.png" alt=""></a></li>
+                        <li><a href="products_info.html"><img src="__IMG__/smart%20remote.png" alt=""></a></li>
+                        <li><a href="products_info.html"><img src="__IMG__/water.png" alt=""></a></li>
+                    </div>
+                      <div class="item">
+                        <li><a href="products_info.html"><img src="__IMG__/gas%20alarm.png" alt=""></a></li>
+                        <li><a href="products_info.html"><img src="__IMG__/outlet.png" alt=""></a></li>
+                        <li><a href="products_info.html"><img src="__IMG__/smart%20remote.png" alt=""></a></li>
+                        <li><a href="products_info.html"><img src="__IMG__/water.png" alt=""></a></li>
+                    </div>
+                        <div class="item">
+                        <li><a href="products_info.html"><img src="__IMG__/gas%20alarm.png" alt=""></a></li>
+                        <li><a href="products_info.html"><img src="__IMG__/outlet.png" alt=""></a></li>
+                        <li><a href="products_info.html"><img src="__IMG__/smart%20remote.png" alt=""></a></li>
+                        <li><a href="products_info.html"><img src="__IMG__/water.png" alt=""></a></li>
+                    </div>
+                    </div>
+                </ul>
+            </div>
+            <div class="col-xs-1 right">
+            <a href="#myCar" data-slide="next">
+                <span class="glyphicon glyphicon-circle-arrow-right allow" style="font-size:40px;"></span>
+            </a>      
+            </div> 
+        </div>   
+	  </div>
+	  <div class="known-more">
+	      <a href="products.html">.了解更多.</a>
+	  </div>
+    </div>
+</div>
+</block>

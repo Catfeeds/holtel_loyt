@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!---head-->
+		<include file="Public/head"/>
+		<!---head-->
+	</head>
+
+	<body>
+		<div class="jumppage_bg" style="display:none;"></div>
+		<div class="jumppage" style="display:none;">
+			<div class="t_1">提示信息</div>
+			<div class="tx1"></div>
+			<input type="button" class="btn2" id="Jq_sure" value="确认">
+			<input type="button" class="btn3" id="Jq_no" value="取消">
+		</div>
+		<!---nav-->
+		<include file="Public/nav"/>
+		<!---nav-->
+
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				<!---head-->
+					<include file="Public/sidebar"/>
+				<!---head-->
+				<!--Search-->
+					<div class="nav-search search-form" id="nav-search">
+							<span class="input-icon">
+								<input type="text" name="{$model['search_key']|default='title'}" value="{:I('title')}" placeholder="请输入关键字" class="nav-search-input" id="nav-search-input" autocomplete="off" />
+								<i class="icon-search nav-search-icon" href="javascript:;" id="search" url="{:U('Think/lists','model='.$model['name'],false)}"></i>
+							</span>
+					</div><!-- #nav-search -->
+					</div>
+				<!--Search-->	
+				<!--top-alert-->
+					<include file="Public/top-alert"/>
+				<!--top-alert-->
+					<div class="page-content">
+						<div class="page-header">
+ 								<h1>[{$model['title']}] 列表</h1>
+						</div><!-- /.page-header -->
+
+
+								<!-- PAGE CONTENT BEGINS -->
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="table-responsive">
+										<form class="form-horizontal" action="{:U('Category/listorders')}" method="post">
+											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+												<thead>
+													<tr>
+														<th class="center">
+															<label>
+																<input class="check-all" type="checkbox"/>
+																<span class="lbl"></span>
+															</label>
+														</th>
+								                        <volist name="list_grids" id="field">
+								                            <th>{$field.title}</th>
+								                        </volist>
+													</tr>
+												</thead>
+												<tbody>		
+								                    <volist name="list_data" id="data">
+								                        <tr>
+								                            <td class="center"><input class="ids" type="checkbox" value="{$data['id']}" name="ids[]"></td>
+								                            <volist name="list_grids" id="grid">
+								                                <td>{:get_list_field($data,$grid)}</td>
+								                            </volist>
+								                        </tr>
+								                    </volist>
+												</tbody>
+											</table>
+											    <div class="page">
+											        {$_page|default=''}
+											    </div>
+											<button class="btn btn-default btn-sm ajax-post confirm" target-form="ids" url="{:U('setStatus?status=-1')}">删 除</button>
+											<button class="btn btn-default btn-sm" onclick="javascript:history.back(-1);return false;">返 回</button>
+											</form>
+										</div><!-- /.table-responsive -->
+									</div><!-- /span -->
+								</div><!-- /row -->	
+				  </div><!-- /.main-content -->
+				<!-- /#ace-settings-container -->
+				<include file="Public/setting"/>
+				<!-- /#ace-settings-container -->
+				
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+		
+		<!---footer-->
+		<include file="Public/footer"/>
+		<!---footer-->
+
+		<!-- page specific plugin scripts -->
+		<!-- ace scripts -->
+
+		<script src="__ASSETS_JS__/ace-elements.min.js"></script>
+		<script src="__ASSETS_JS__/ace.min.js"></script>
+		<!--<script src="__ASSETS_JS__/common.js"></script>-->
+		<!-- inline scripts related to this page -->
+		<script type="text/javascript">
+		$(function(){
+			//搜索功能
+			$("#search").click(function(){
+				var url = $(this).attr('url');
+		        var query  = $('.search-form').find('input').serialize();
+		        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+		        query = query.replace(/^&/g,'');
+		        if( url.indexOf('?')>0 ){
+		            url += '&' + query;
+		        }else{
+		            url += '?' + query;
+		        }
+				window.location.href = url;
+			});
+		
+		    //回车自动提交
+		    $('.search-form').find('input').keyup(function(event){
+		        if(event.keyCode===13){
+		            $("#search").click();
+		        }
+		    });
+		
+		})
+		</script>
+</body>
+</html>

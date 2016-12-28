@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!---head-->
+		<include file="Public/head"/>
+		<!---head-->
+	</head>
+
+	<body>
+		<!---nav-->
+		<include file="Public/nav"/>
+		<!---nav-->
+
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				<!---head-->
+					<include file="Public/sidebar"/>
+				<!---head-->
+				</div>
+				<!--top-alert-->
+					<include file="Public/top-alert"/>
+				<!--top-alert-->
+					<div class="page-content">
+						<div class="page-header">
+								<h1>回收站({:count($list)})</h1>
+						</div><!-- /.page-header -->
+						
+								<!-- PAGE CONTENT BEGINS -->
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="table-responsive">
+											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+												<thead>
+													<tr>
+														<th class="center">
+															<input class="check-all" type="checkbox" />
+														</th>
+														<th class="">编号</th>
+														<th class="">标题</th>
+														<th class="">创建者</th>
+														<th class="">类型</th>
+														<th class="">分类</th>
+														<th class="">删除时间</th>
+														<th class="">操作</th>
+													</tr>
+												</thead>
+												<tbody>		
+												<notempty name="list">
+													<volist name="list" id="vo">
+													<tr>
+											            <td class="center"><input class="ids" type="checkbox" name="ids[]" value="{$vo.id}" /></td>
+														<td>{$vo.id} </td>
+														<td>{$vo.title}</td>
+														<td>{$vo.username} </td>
+														<td><span>{:get_document_type($vo['type'])}</span></td>
+														<td><span>{:get_cate($vo['category_id'])}</span></td>
+														<td><span>{$vo.update_time|time_format}</span></td>
+														<td><a href="{:U('article/permit?ids='.$vo['id'])}" class="ajax-get">还原</a>
+											                </td>
+													</tr>
+													</volist>
+													<else/>
+													  <td colspan="8" class="text-center"> aOh! 暂时还没有内容! </td>
+													</notempty>
+												</tbody>
+											</table>
+											<div class="badoo">
+										        {$_page}
+										    </div>						
+											<button class="btn btn-primary btn-sm ajax-post" target-form="ids" url="{:U('article/permit')}">还原</button>
+											<button class="btn btn-default btn-sm ajax-post" target-form="ids" url="{:U('article/clear')}">删 除</button>
+										</div><!-- /.table-responsive -->
+									</div><!-- /span -->
+								</div><!-- /row -->	
+				  </div><!-- /.main-content -->
+				<!-- /#ace-settings-container -->
+				<include file="Public/setting"/>
+				<!-- /#ace-settings-container -->
+				
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+		
+		<!---footer-->
+		<include file="Public/footer"/>
+		<!---footer-->
+
+		<!-- page specific plugin scripts -->
+		<!-- ace scripts -->
+
+		<script src="__ASSETS_JS__/ace-elements.min.js"></script>
+		<script src="__ASSETS_JS__/ace.min.js"></script>
+		<!--<script src="__ASSETS_JS__/common.js"></script>-->
+		<!-- inline scripts related to this page -->
+
+		<script type="text/javascript">
+
+		</script>
+</body>
+</html>

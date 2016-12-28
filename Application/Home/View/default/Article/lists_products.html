@@ -1,0 +1,55 @@
+<extend name="Base/common"/>
+<block name="pageHeader">
+	 <link rel="stylesheet" href="__CSS__/products.css">
+	 <script type="text/javascript" src="__JS__/products.js"></script>
+</block>
+<block name="body">
+	<div style="clear:both;"></div>
+	<div class="products">
+	   <div class="container">
+	        <div class="row">
+	           <div class="col-xs-12" style="">
+	               <span><a href="">首页</a>&gt;<a href="">所有产品</a>&gt;<a href=""><empty name="list_new_no_document">{$nowcategory.title}<else />{$maxid_no['title']}</empty></a></span>
+	            </div> 
+	        </div>      
+	   </div>
+	   <div class="Category">
+	        <div class="container">
+	            <div class="row">
+	               <div class="col-xs-12">
+	                   <dl>
+	                       <dt>分类：</dt>
+	                       <dd class="active"><a href="">全部</a></dd>
+						   <volist name="listnew" id="data">
+		                       <dd><a href="{:U('Article/lists?category='.$category['name'].'&category_id='.$data['id'])}">{$data.title}</a></dd>
+						   </volist>
+	                       <a href="" class="more-Category">更多<span class="glyphicon glyphicon-chevron-down"></span></a>
+	                   </dl>
+	                </div> 
+	            </div>      
+	       </div>
+	   </div>
+	    <div class="container">
+	        <!--<div class="row Category">
+	           <div class="col-xs-12">
+	               全部
+	            </div> 
+	        </div>-->
+	        <div class="row">
+	            <div class="col-xs-12">
+	                <ul>
+	                	<volist name="list_new_document" id="list_new">
+		                     <li><a href="{:U('Article/detail?id='.$list_new['id'])}"><img src="__IMG__/gas%20alarm.png" alt=""></a>
+		                     <p class="img-word">煤气报警器</p>
+		                     <div class="up-content">
+		                         <p>探测精准，反馈及时</p>
+		                         <p>可手动或通过手机远程控制阀门开关</p>
+		                     </div>
+		                    </li>
+						</volist>
+	                </ul>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</block>

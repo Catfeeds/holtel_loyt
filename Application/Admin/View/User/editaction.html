@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!---head-->
+		<include file="Public/head"/>
+		<!---head-->
+	</head>
+<style>
+	.upload-img-box .upload-pre-item {
+	    padding: 1px;
+	    width: 120px;
+	    max-height: 120px;
+	    overflow: hidden;
+	    text-align: center;
+	    cursor: pointer;
+	    border: 1px solid #ccc;
+	    transition: all .3s linear;
+	}
+	img {
+	    max-width: 100%;
+	    border: 0 none;
+	}	
+</style>
+	<body>
+		
+		<!---nav-->
+		<include file="Public/nav"/>
+		<!---nav-->
+		<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				<!---sidebar-->
+					<include file="Public/sidebar"/>
+				<!---sidebar-->
+				</div>
+				<!--top-alert-->
+					<include file="Public/top-alert"/>
+				<!--top-alert-->
+					<div class="page-content">
+						<div class="page-header">
+							<h1><if condition="ACTION_NAME eq 'addaction'">新增<else/>编辑</if>行为</h1>
+						</div><!-- /.page-header -->
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+							<form class="form-horizontal js-ajax-form"  id="form"  action="{:U('saveAction')}" method="post" role="form">
+								<div class="tabbable">
+							        <div class="tab-content">
+							          <div class="tab-pane active" id="A">
+											<fieldset>
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">行为标识：</label>
+													<div class="col-sm-9">
+														<input type="text"  name="name" value="{$data.name}" class="col-xs-10 col-sm-5">
+														<span class="help-inline">
+															<span class="middle"><code>（输入行为标识 英文字母）</code></span>
+														</span>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">行为名称：</label>
+													<div class="col-sm-9">
+														<input type="text" name="title" value="{$data.title}" class="col-xs-10 col-sm-5">
+														<span class="help-inline">
+															<span class="middle"><code>（输入行为名称）</code></span>
+														</span>
+													</div>
+												</div>											
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">行为类型：</label>
+													<div class="col-sm-9">
+														<select name="type" class="col-xs-10 col-sm-5">
+															<volist name=":get_action_type(null,true)" id="vo">
+																<option value="{$key}">{$vo}</option>
+															</volist>
+														</select>
+														<span class="help-inline">
+															<span class="middle"><code>（选择行为类型）</code></span>
+														</span>
+													</div>
+												</div>											
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">行为描述：</label>
+													<div class="col-sm-9">
+														<textarea name="remark"  rows="5" class="col-xs-10 col-sm-5">{$data.remark}</textarea>
+														<span class="help-inline">
+															<span class="middle"><code>（输入行为描述）</code></span>
+														</span>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">行为规则：</label>
+													<div class="col-sm-9">
+														<textarea name="rule"  rows="5" class="col-xs-10 col-sm-5">{$data.rule}</textarea>
+														<span class="help-inline">
+															<span class="middle"><code>（输入行为规则，不写则只记录日志）</code></span>
+														</span>
+													</div>
+												</div>				
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">日志规则：</label>
+													<div class="col-sm-9">
+														<textarea name="log"  rows="5" class="col-xs-10 col-sm-5">{$data.log}</textarea>
+														<span class="help-inline">
+															<span class="middle"><code>（记录日志备注时按此规则来生成，支持[变量|函数]。目前变量有：user,time,model,record,data）</code></span>
+														</span>
+													</div>
+												</div>																															
+											</fieldset>
+							          </div>
+							        </div>
+							    </div>
+							    <div class="form-actions text-center">
+							    	<input type="hidden" name="id" value="{$data.id}"/>
+									<button type="submit" class="btn btn-primary btn-sm ajax-post" target-form="form-horizontal">确 定</button>
+									<button class="btn btn-default btn-sm" onclick="javascript:history.back(-1);return false;">返 回</button>
+							    </div>
+							</form>
+
+								<!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div><!-- /.main-content -->
+
+				<!-- /#ace-settings-container -->
+				<include file="Public/setting"/>
+				<!-- /#ace-settings-container -->
+				
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!---footer-->
+		<include file="Public/footer"/>
+		<!---footer-->
+
+		<!-- page specific plugin scripts -->
+		<!-- ace scripts -->
+
+		<script src="__ASSETS_JS__/ace-elements.min.js"></script>
+		<script src="__ASSETS_JS__/ace.min.js"></script>
+
+		<!-- inline scripts related to this page -->
+		<script type="text/javascript" charset="utf-8">
+			Think.setValue('type',{$type|default=1});
+		    //导航高亮
+		    highlight_subnav('{:U('User/action')}');
+		</script>
+</body>
+</html>

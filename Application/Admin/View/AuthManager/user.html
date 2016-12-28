@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!---head-->
+		<include file="Public/head"/>
+		<!---head-->
+	</head>
+<style>	
+	/* 授权编辑页 */
+	.checkmod {
+	    margin-bottom: 20px;
+	    border: solid 1px #d0d0d0;
+		border-radius: 4px;
+		padding:10px;
+	}
+	.checkmod dt {
+	    padding-left: 10px;
+	    height: 30px;
+	    line-height: 20px;
+	    font-weight: bold;
+	    border-bottom: 1px solid #ebebeb;
+	    background-color: #ECECEC;
+	}
+	.checkmod dd {
+	    padding-left: 10px;
+	    line-height: 30px;
+	}
+	.checkmod dd .checkbox {
+	    margin: 0 10px 0 0;
+	}
+	.checkmod dd .divsion {
+	    margin-right: 20px;
+	}	
+	.checkbox, .radio {
+	    display: inline-block;
+	    height: 20px;
+	    line-height: 20px;
+	}
+	.fr {
+	    float: right!important;
+	}	
+</style>
+	<body>
+<!-- 管理员用户组新增和编辑页面 -->		
+		<!---nav-->
+		<include file="Public/nav"/>
+		<!---nav-->
+		<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				<!---sidebar-->
+					<include file="Public/sidebar"/>
+				<!---sidebar-->
+				</div>
+				<!--top-alert-->
+					<include file="Public/top-alert"/>
+				<!--top-alert-->
+					<div class="page-content">
+						<div class="page-header">
+
+						</div><!-- /.page-header -->
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+							<ul class="nav nav-tabs">
+						        <li><a href="{:U('AuthManager/access',array('group_name'=>I('group_name') ,'group_id'=> I('group_id')))}">访问授权</a></li>
+						        <li><a href="{:U('AuthManager/category',array('group_name'=>I('group_name') ,'group_id'=> I('group_id')))}">分类授权</a></li>
+								<li class="active"><a href="javascript:;">成员授权</a></li>
+							    <li class="fr">
+								    <select name="group">
+									    <volist name="auth_group" id="vo">
+										    <option value="{:U('AuthManager/user',array('group_id'=>$vo['id'],'group_name'=>$vo['title']))}" <eq name="vo['id']" value="$this_group['id']">selected</eq> >{$vo.title}</option>
+									    </volist>
+								    </select>
+							    </li>
+						    </ul>
+								<div class="tabbable">
+							        <div class="tab-content">
+											<fieldset>
+									            <input type="hidden" name="group_id" value="{:I('group_id')}">
+												<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+													<thead>
+												        <tr>
+															<th class="">UID</th>
+															<th class="">昵称</th>
+															<th class="">最后登录时间</th>
+															<th class="">最后登录IP</th>
+															<th class="">状态</th>
+															<th class="">操作</th>
+														</tr>
+													</thead>
+													<tbody>		
+														<volist name="_list" id="vo">
+														<tr>
+															<td>{$vo.uid} </td>
+															<td>{$vo.nickname}</td>
+															<td><span>{$vo.last_login_time|time_format}</span></td>
+															<td><span>{$vo.last_login_ip|long2ip}</span></td>
+															<td>{$vo.status_text}</td>
+															<td><a href="{:U('AuthManager/removeFromGroup?uid='.$vo['uid'].'&group_id='.I('group_id'))}" class="ajax-get">解除授权</a></td>
+														</tr>
+														</volist>
+													</tbody>
+												</table>
+											</fieldset>			  
+							        </div>
+							    </div>
+							    <div class="form-actions text-center" style="padding: 10px 20px 60px;">
+							    	<form class="add-user" action="{:U('addToGroup')}" method="post" enctype="application/x-www-form-urlencoded" >
+							    		<div class="form-group">
+							    			 <div class="col-sm-6  col-xs-6">
+												<input class="form-control " type="text" name="uid" placeholder="请输入uid,多个用英文逗号分隔">
+											</div>
+											<input type="hidden" name="group_id" value="{:I('group_id')}">
+											 <div class="col-sm-1 col-xs-1" style="float:left !important;">
+							                 	<button type="submit" class="btn btn-primary btn-sm ajax-post" target-form="add-user">新 增</button>
+											 </div>
+									   </div>
+									</form>
+							    </div>
+
+								<!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div><!-- /.main-content -->
+
+				<!-- /#ace-settings-container -->
+				<include file="Public/setting"/>
+				<!-- /#ace-settings-container -->
+				
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!---footer-->
+		<include file="Public/footer"/>
+		<!---footer-->
+
+		<!-- page specific plugin scripts -->
+		<!-- ace scripts -->
+
+		<script src="__ASSETS_JS__/ace-elements.min.js"></script>
+		<script src="__ASSETS_JS__/ace.min.js"></script>
+
+		<!-- inline scripts related to this page -->
+		<script type="text/javascript">
+			$('select[name=group]').change(function(){
+				location.href = this.value;
+			});
+		    //导航高亮
+		    highlight_subnav('{:U('AuthManager/index')}');
+		</script>
+</body>
+</html>

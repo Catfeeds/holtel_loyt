@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!---head-->
+		<include file="Public/head"/>
+		<!---head-->
+	</head>
+<style>
+	.upload-img-box .upload-pre-item {
+	    padding: 1px;
+	    width: 120px;
+	    max-height: 120px;
+	    overflow: hidden;
+	    text-align: center;
+	    cursor: pointer;
+	    border: 1px solid #ccc;
+	    transition: all .3s linear;
+	}
+	img {
+	    max-width: 100%;
+	    border: 0 none;
+	}	
+</style>
+	<body>
+		
+		<!---nav-->
+		<include file="Public/nav"/>
+		<!---nav-->
+		<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				<!---sidebar-->
+					<include file="Public/sidebar"/>
+				<!---sidebar-->
+				</div>
+				<!--top-alert-->
+					<include file="Public/top-alert"/>
+				<!--top-alert-->
+					<div class="page-content">
+						<div class="page-header">
+
+						</div><!-- /.page-header -->
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+							<form class="form-horizontal js-ajax-form"  action="{:U('addToGroup')}" method="post" enctype="application/x-www-form-urlencoded">
+								<div class="tabbable">
+							        <div class="tab-content">
+							          <div class="tab-pane active" id="A">
+											<fieldset>
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">{$nickname} 所属的用户组列表：</label>
+													<div class="col-sm-9">
+											            <volist name="auth_groups" id="vo">
+											                <label class=" checkbox-inline">
+											                    <input class="auth_groups" type="checkbox" name="group_id[]" value="{$vo.id}">{$vo.title}
+											                </label>
+											            </volist>
+													</div>
+												</div>																									
+											</fieldset>
+							          </div>
+							        </div>
+							    </div>
+							    <div class="form-actions text-center">
+							    	<input type="hidden" name="uid" value="{:I('uid')}">
+            						<input type="hidden" name="batch" value="true">
+									<button type="submit" class="btn btn-primary btn-sm ajax-post" target-form="form-horizontal">确 定</button>
+                					<button class="btn btn-primary btn-sm" onclick="javascript:history.back(-1);return false;">返 回</button>
+							    </div>
+							</form>
+
+								<!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div><!-- /.main-content -->
+
+				<!-- /#ace-settings-container -->
+				<include file="Public/setting"/>
+				<!-- /#ace-settings-container -->
+				
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!---footer-->
+		<include file="Public/footer"/>
+		<!---footer-->
+
+		<!-- page specific plugin scripts -->
+		<!-- ace scripts -->
+
+		<script src="__ASSETS_JS__/ace-elements.min.js"></script>
+		<script src="__ASSETS_JS__/ace.min.js"></script>
+
+		<!-- inline scripts related to this page -->
+		<script type="text/javascript" charset="utf-8">
+		    $(function(){
+		        var group = [{$user_groups}];
+		        $('.auth_groups').each(function(){
+		            if( $.inArray( parseInt(this.value,10),group )>-1 ){
+						//$.inArray()方法类似于JavaScript的原生.indexOf()方法，没有找到匹配元素时它返回-1
+		                $(this).prop('checked',true);
+		            }
+		        });
+		    });
+		    // 导航高亮
+		    highlight_subnav('{:U('User/index')}');
+		</script>
+</body>
+</html>

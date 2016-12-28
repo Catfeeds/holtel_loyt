@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!---head-->
+		<include file="Public/head"/>
+		<!---head-->
+	</head>
+
+	<body>
+		<!---nav-->
+		<include file="Public/nav"/>
+		<!---nav-->
+
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				<!---head-->
+					<include file="Public/sidebar"/>
+				<!---head-->
+				</div>
+				<!--top-alert-->
+					<include file="Public/top-alert"/>
+				<!--top-alert-->
+					<div class="page-content">
+						<div class="page-header">
+
+						</div><!-- /.page-header -->
+
+
+								<!-- PAGE CONTENT BEGINS -->
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="table-responsive">
+											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+												<thead>
+													<tr>
+														<th class="center">
+															<label>
+																<input class="check-all" type="checkbox"/>
+																<span class="lbl"></span>
+															</label>
+														</th>
+													<th class="">用户组</th>
+													<th class="">描述</th>
+											
+													<th class="">授权</th>
+													<th class="">状态</th>
+													<th class="">操作</th>
+													</tr>
+												</thead>
+												<tbody>		
+													<notempty name="_list">
+													<volist name="_list" id="vo">
+													<tr>
+											            <td class="center"><input class="ids" type="checkbox" name="id[]" value="{$vo.id}" /></td>
+														<td><a href="{:U('AuthManager/editgroup?id='.$vo['id'])}">{$vo.title}</a> </td>
+														<td><span>{:mb_strimwidth($vo['description'],0,60,"...","utf-8")}</span></td>
+											
+											
+														<td><a href="{:U('AuthManager/access?group_name='.$vo['title'].'&group_id='.$vo['id'])}" >访问授权</a>
+														<a href="{:U('AuthManager/category?group_name='.$vo['title'].'&group_id='.$vo['id'])}" >分类授权</a>
+														<a href="{:U('AuthManager/user?group_name='.$vo['title'].'&group_id='.$vo['id'])}" >成员授权</a>
+														</td>
+														<td>{$vo.status_text}</td>
+														<td><eq name="vo.status" value="1">
+															<a href="{:U('AuthManager/changeStatus?method=forbidGroup&id='.$vo['id'])}" class="ajax-get">禁用</a>
+															<else/>
+															<a href="{:U('AuthManager/changeStatus?method=resumeGroup&id='.$vo['id'])}" class="ajax-get">启用</a>
+															</eq>
+															<a href="{:U('AuthManager/changeStatus?method=deleteGroup&id='.$vo['id'])}" class="confirm ajax-get">删除</a>
+											                </td>
+													</tr>
+													</volist>
+													<else/>
+													<td colspan="6" class="text-center"> aOh! 暂时还没有内容! </td>
+													</notempty>
+												</tbody>
+											</table>
+										    <!-- 分页 -->
+										    <div class="badoo">
+										        {$_page}
+										    </div>
+											<a id="add-group" class="btn btn-sm btn-primary" href="{:U('createGroup')}">新 增</a>
+									        <a url="{:U('changestatus?method=resumeGroup')}" class="btn btn-sm btn-primary ajax-post" target-form="ids" >启 用</a>
+									        <a url="{:U('changestatus?method=forbidGroup')}" class="btn btn-default btn-sm ajax-post" target-form="ids" >禁 用</a>
+									        <a url="{:U('changestatus?method=deleteGroup')}" class="btn btn-default btn-sm ajax-post confirm" target-form="ids" >删 除</a>
+										</div><!-- /.table-responsive -->
+									</div><!-- /span -->
+								</div><!-- /row -->	
+				  </div><!-- /.main-content -->
+				<!-- /#ace-settings-container -->
+				<include file="Public/setting"/>
+				<!-- /#ace-settings-container -->
+				
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+		
+		<!---footer-->
+		<include file="Public/footer"/>
+		<!---footer-->
+
+		<!-- page specific plugin scripts -->
+		<!-- ace scripts -->
+
+		<script src="__ASSETS_JS__/ace-elements.min.js"></script>
+		<script src="__ASSETS_JS__/ace.min.js"></script>
+		<!--<script src="__ASSETS_JS__/common.js"></script>-->
+		<!-- inline scripts related to this page -->
+
+		<script type="text/javascript">
+		    //导航高亮
+		    highlight_subnav('{:U('AuthManager/index')}');
+		</script>
+</body>
+</html>

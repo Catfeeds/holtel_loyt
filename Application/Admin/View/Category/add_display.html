@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!---head-->
+		<include file="Public/head"/>
+		<!---head-->
+	</head>
+
+	<body>
+		
+		<!---nav-->
+		<include file="Public/nav"/>
+		<!---nav-->
+
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				<!---sidebar-->
+					<include file="Public/sidebar"/>
+				<!---sidebar-->
+
+					<div class="page-content">
+						<div class="page-header">
+
+						</div><!-- /.page-header -->
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+							<ul class="nav nav-tabs">
+						        <li class="active"><a href="#A" data-toggle="tab">基本设置</a></li>
+						        <li><a href="#C" data-toggle="tab">高级设置</a></li>
+						    </ul>
+							<form class="form-horizontal js-ajax-form" action="{:U('Category/add')}" method="post" role="form">
+								<div class="tabbable">
+							        <div class="tab-content">
+							          <div class="tab-pane active" id="A">
+											<fieldset>
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">上级栏目：</label>
+													<div class="col-sm-9">
+														<select name="parent" class="col-xs-10 col-sm-5">
+															<option value="0">作为顶级栏目：</option>
+															{$terms_tree}
+														</select>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">栏目名称：</label>
+													<div class="col-sm-9">
+														<input type="text" name="title" value="{$info.title|default=''}" class="col-xs-10 col-sm-5">
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">分类标识：</label>
+													<div class="col-sm-9">
+														<input type="text" name="name" value="{$info.name|default=''}" class="col-xs-2">
+														<span class="help-inline">
+															<span class="middle"><code>（英文字母）</code></span>
+														</span>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">栏目简介：</label>
+													<div class="col-sm-9">
+														<textarea name="groups" rows="5" cols="57" class="col-xs-10 col-sm-5">{$info.groups|default=''}</textarea>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">发布内容：</label>
+													<div class="col-sm-9">
+														<label class="radio-inline">
+														  <input type="radio" name="allow_publish" value="0"> 不允许
+														</label>
+														<label class="radio-inline">
+														  <input type="radio" name="allow_publish" value="1"> 仅允许后台
+														</label>
+														<label class="radio-inline">
+														  <input type="radio" name="allow_publish" value="2"> 允许前后台
+														</label>
+														<span class="help-inline">
+															<span class="middle"><code>（是否允许发布内容）</code></span>
+														</span>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">是否审核：</label>
+													<div class="col-sm-9">
+														<label class="radio-inline">
+														  <input type="radio" name="check"  value="0"> 不需要
+														</label>
+														<label class="radio-inline">
+														  <input type="radio" name="check"  value="1"> 需要
+														</label>
+														<span class="help-inline">
+															<span class="middle"><code>（在该分类下发布的内容是否需要审核）</code></span>
+														</span>
+													</div>
+												</div>
+												
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">允许文档类型：</label>
+													<div class="col-sm-9">
+														<volist name=":C('DOCUMENT_MODEL_TYPE')" id="type">
+															<label class="checkbox-inline">
+															  <input type="checkbox" name="type[]" value="{$key}"> {$type}
+															</label>
+														</volist>
+													</div>
+												</div>
+												
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">列表绑定文档模型：</label>
+													<div class="col-sm-9">
+														<volist name=":get_document_model()" id="list">
+															<label class="checkbox-inline">
+															  <input type="checkbox" name="model[]" value="{$list.id}"> {$list.title}
+															</label>
+														</volist>
+														<span class="help-inline">
+															<span class="middle"><code>（列表支持发布的文档模型）</code></span>
+														</span>														
+													</div>
+												</div>		
+												
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">子文档绑定绑定模型：</label>
+													<div class="col-sm-9">
+														<volist name=":get_document_model()" id="list">
+															<label class="checkbox-inline">
+															  <input type="checkbox" name="model_sub[]" value="{$list.id}">{$list.title}
+															</label>
+														</volist>
+														<span class="help-inline">
+															<span class="middle"><code>（子文档支持发布的文档模型）</code></span>
+														</span>														
+													</div>
+												</div>																							
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">栏目缩略图：</label>
+													<div class="col-sm-2">			
+														<input type="text" name="icon" id="icon" class="col-xs-12" value="{$info['icon']|default=''}"/>									
+													</div>
+													<div class="col-sm-7">	
+														<input type="file" id="upload_picture">	
+													<div>	
+												</div>	
+												
+												
+											</fieldset>
+							          </div>
+							          <div class="tab-pane" id="C">
+											<fieldset>
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">可见性：</label>
+													<div class="col-sm-9">
+														<select name="display" class="col-xs-10 col-sm-5">
+															<option value="1">所有人可见</option>
+															<option value="0">不可见</option>
+															<option value="2">管理员可见</option>
+														</select>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">列表行数：</label>
+													<div class="col-sm-9">
+														<input type="text" name="list_row" value="{$info.list_row|default=10}" class="col-xs-2">
+														<span class="help-inline">
+															<span class="middle"><code>（栏目列表默认调用条数）</code></span>
+														</span>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">栏目SEO标题：</label>
+													<div class="col-sm-9">
+														<input type="text" name="meta_title" value="{$info.meta_title|default=''}" class="col-xs-10 col-sm-5">
+														<span class="help-inline">
+															<span class="middle"><code>（显示于页面 meta title）</code></span>
+														</span>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">栏目SEO关键词：</label>
+													<div class="col-sm-9">
+														<textarea type="text" name="keywords" rows="5" cols="57" class="col-xs-10 col-sm-5">
+															{$info.keywords|default=''}
+														</textarea>
+														<span class="help-inline">
+															<span class="middle"><code>（显示于页面 meta keywords）</code></span>
+														</span>
+													</div>
+												</div>	
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">栏目SEO描述：</label>
+													<div class="col-sm-9">
+														<textarea type="text" name="description"  rows="5" cols="57" class="col-xs-10 col-sm-5">
+															{$info.description|default=''}
+														</textarea>
+														<span class="help-inline">
+															<span class="middle"><code>（显示于页面 description）</code></span>
+														</span>
+													</div>
+												</div>	
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">频道模板：</label>
+													<div class="col-sm-9">
+														<input type="text" name="template_index" value="{$info.template_index|default=''}" class="col-xs-2">
+													</div>
+												</div>		
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">列表模板：</label>
+													<div class="col-sm-9">
+														<input type="text" name="template_lists" value="{$info.template_lists|default=''}" class="col-xs-2">
+													</div>
+												</div>													
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">详情模板：</label>
+													<div class="col-sm-9">
+														<input type="text" name="template_detail" value="{$info.template_detail|default=''}" class="col-xs-2">
+													</div>
+												</div>	
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">编辑模板：</label>
+													<div class="col-sm-9">
+														<input type="text" name="template_edit" value="{$info.template_edit|default=''}" class="col-xs-2">
+													</div>
+												</div>																																			
+											</fieldset>
+							          </div>
+							        </div>
+							    </div>
+							    <div class="form-actions text-center">
+							    	<input type="hidden" name="id" value="{$info.id|default=''}">
+									<input type="hidden" name="pid" value="{:isset($category['id'])?$category['id']:$info['pid']}">
+							     	<button class="btn btn-primary btn-sm js-ajax-submit"type="submit">提交</button>
+							      	<button class="btn btn-default btn-sm" onclick="javascript:history.back(-1);return false;">返 回</button>
+							    </div>
+							</form>
+
+								<!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div><!-- /.main-content -->
+
+				<!-- /#ace-settings-container -->
+				<include file="Public/setting"/>
+				<!-- /#ace-settings-container -->
+				
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!---footer-->
+		<include file="Public/footer"/>
+		<!---footer-->
+
+		<!-- page specific plugin scripts -->
+		<!-- ace scripts -->
+
+		<script src="__ASSETS_JS__/ace-elements.min.js"></script>
+		<script src="__ASSETS_JS__/ace.min.js"></script>
+
+		<!-- inline scripts related to this page -->
+		<script type="text/javascript">
+			<present name="info.id">
+			Think.setValue("allow_publish", {$info.allow_publish|default=1});
+			Think.setValue("check", {$info.check|default=0});
+			Think.setValue("model[]", {$info.model|json_encode} || [1]);
+			Think.setValue("model_sub[]", {$info.model_sub|json_encode} || [1]);
+			Think.setValue("type[]", {$info.type|json_encode} || [2]);
+			Think.setValue("display", {$info.display|default=1});
+			Think.setValue("reply", {$info.reply|default=0});
+			Think.setValue("reply_model[]", {$info.reply_model|json_encode} || [1]);
+			</present>
+			$(function(){
+				showTab();
+				$("input[name=reply]").change(function(){
+					var $reply = $(".form-item.reply");
+					parseInt(this.value) ? $reply.show() : $reply.hide();
+				}).filter(":checked").change();
+			});
+			//导航高亮
+			highlight_subnav('{:U('Category/index')}');
+		</script>
+</body>
+</html>

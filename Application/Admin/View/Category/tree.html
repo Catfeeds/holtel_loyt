@@ -1,0 +1,27 @@
+<volist name="tree" id="list">
+	 <tr>
+		<td class="center">
+		<input class="ids" type="checkbox" value="{$list.id}" name="ids[]">
+		</td>
+		<td><input name="sort[{$list.id}]" type="text" size="3" value="{$list.sort}" class="input"></td>
+		<td><a href="#">{$list.id}</a></td>
+		<td class="title">
+				{$list.html}{$list.space}{$list.title}
+			</div>
+		</td>
+		<td class="hidden-480">{$list['allow_publish']?'是':'否'}</td>
+		<td><a class="add-sub-cate" title="添加子分类" href="{:U('add?pid='.$list['id'])}">添加下级栏目</a></td>
+		<td>
+			<div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+			<a title="编辑" href="{:U('edit?id='.$list['id'].'&pid='.$list['pid'])}" class="confirm  btn btn-xs btn-info js-ajax-delete"><i class="icon-edit bigger-120"></i></a>
+			<span id="data_{$list.id}" dataName="{$list.title}" style="display:none;"></span>	
+			<a title="删除" href="{:U('remove?id='.$list['id'])}" class="confirm ajax-get btn btn-xs btn-danger"><i class="icon-trash bigger-120"></i></a>
+			</div>
+	    </td>
+		<tr/>
+		<notempty name="list['child']">
+			<tr class="child">
+				{:R('Category/tree', array($list['child']))}
+			<tr/>
+		</notempty>
+</volist>

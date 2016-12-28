@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!---head-->
+		<include file="Public/head"/>
+		<!---head-->
+	</head>
+
+	<body>
+		<!---nav-->
+		<include file="Public/nav"/>
+		<!---nav-->
+
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				<!---head-->
+					<include file="Public/sidebar"/>
+				<!---head-->
+				</div>
+				<!--top-alert-->
+					<include file="Public/top-alert"/>
+				<!--top-alert-->
+					<div class="page-content">
+						<div class="page-header">
+
+						</div><!-- /.page-header -->
+
+
+								<!-- PAGE CONTENT BEGINS -->
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="table-responsive">
+										<form class="form-horizontal" action="{:U('Category/listorders')}" method="post">
+											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+												<thead>
+													<tr>
+														<th class="center">
+															<label>
+																<input class="check-all" type="checkbox" />
+																<span class="lbl"></span>
+															</label>
+														</th>
+													<th class="">编号</th>
+													<th class="">标题</th>
+													<th class="">创建者</th>
+													<th class="">类型</th>
+													<th class="">分类</th>
+													<th class="">发布时间</th>
+													<th class="">操作</th>
+													</tr>
+												</thead>
+												<tbody>	
+												   <notempty name="list">	
+													<volist name="list" id="vo">
+													<tr>
+											            <td class="center"><input class="ids" type="checkbox" name="ids[]" value="{$vo.id}" /></td>
+														<td>{$vo.id} </td>
+														<td><a href="{:U('Article/edit?cate_id='.$vo['category_id'].'&id='.$vo['id'])}">{$vo.title}</a></td>
+														<td>{$vo.username} </td>
+														<td><span>{:get_document_type($vo['type'])}</span></td>
+														<td><span>{:get_cate($vo['category_id'])}</span></td>
+														<td><span>{$vo.create_time|time_format}</span></td>
+														<td><a href="{:U('Article/edit?cate_id='.$vo['category_id'].'&id='.$vo['id'])}">编辑</a>
+															<a href="{:U('Article/setStatus?ids='.$vo['id'].'&status=1')}" class="ajax-get">审核</a>
+															<a href="{:U('Article/setStatus?status=-1&ids='.$vo['id'])}" class="confirm ajax-get">删除</a>
+											                </td>
+													</tr>
+													</volist>
+													<else/>
+														<td colspan="8" class="text-center"> aOh! 暂时还没有内容! </td>
+													</notempty>	
+												</tbody>
+											</table>
+											<div class="badoo">
+											     {$_page}
+											</div>
+											<button url="{:U('article/setStatus?status=1')}" class="btn btn-primary btn-sm ajax-post" target-form="ids">审 核</button>		
+											<button class="btn ajax-post btn-default btn-sm confirm" target-form="ids" url="{:U("Article/setStatus",array("status"=>-1))}">删 除</button>
+											</form>
+										</div><!-- /.table-responsive -->
+									</div><!-- /span -->
+								</div><!-- /row -->	
+				  </div><!-- /.main-content -->
+				<!-- /#ace-settings-container -->
+				<include file="Public/setting"/>
+				<!-- /#ace-settings-container -->
+				
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+		
+		<!---footer-->
+		<include file="Public/footer"/>
+		<!---footer-->
+
+		<!-- page specific plugin scripts -->
+		<!-- ace scripts -->
+
+		<script src="__ASSETS_JS__/ace-elements.min.js"></script>
+		<script src="__ASSETS_JS__/ace.min.js"></script>
+		<!--<script src="__ASSETS_JS__/common.js"></script>-->
+		<!-- inline scripts related to this page -->
+
+		<script type="text/javascript">
+
+		</script>
+</body>
+</html>

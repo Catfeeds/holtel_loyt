@@ -1,0 +1,42 @@
+<extend name="Base/common"/>
+<block name="pageHeader">
+	 <link rel="stylesheet" href="__CSS__/solution.css">
+</block>
+<block name="body">
+	<div style="clear:both;"></div>
+		<div class="solution">
+		    <div class="container column-content">
+		        <div class="row">
+		            <div class="col-xs-3 left-colum">
+		                <span><a href="">首页</a>&gt;<a href="">{$category['title']}</a>&gt;<a href=""><empty name="maxinfo">{$info['title']}<else />{$maxinfo['title']}</empty> </a></span>
+		                <ul>
+		                	<volist name="Documentlist" id="data">
+		                   		 <!--<li><a href="{:U('Article/lists?category='.$category['name'].'&id='.$data['id'])}" class="<eq name="id" value="$data['id']">act</eq>">{$data.title}</a></li>-->
+								 <li><a href="{:U('Article/lists?category='.$category['name'].'&id='.$data['id'])}" class="<eq name="id" value="$data['id']">act</eq> <if condition="($maxid eq $data['id']) AND $maxinfo">act</if>">{$data.title}</a></li>
+								 <!--class="act"-->
+							</volist>
+		                </ul>
+		                <div class="left-next" style="padding:2px 0;border-bottom:1px dashed #d9d4d4;">
+		                    <p style="font-size:12px;">产品咨询 / 购买热线 <span style="color:red">400-6768-678</span></p>
+		                </div>
+		                <div class="row">
+		                    <div class="col-xs-4">
+		                        <img src="__IMG__/DownloadApp.png" alt="app下载" style="width:70px;height:70px;">
+		                    </div>
+		                    <div class="col-xs-8" style="border-bottom:1px dashed #d9d4d4;border-top:1px dashed #d9d4d4;">
+		                        <h4 style="font-weight:bold;">免费下载APP</h4>
+		                        <span style="padding:15px 0;color:red;">激情体验瓯宝智能家居</span>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="col-xs-9 solution-content">
+		            	<empty name="maxinfo">
+							{$info['content']}
+						<else /> 
+							{$maxinfo['content']}
+						</empty> 
+		            </div>
+		        </div>
+	    </div>
+	</div>
+</block>

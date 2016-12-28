@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!---head-->
+		<include file="Public/head"/>
+		<!---head-->
+	</head>
+<style>
+	.upload-img-box .upload-pre-item {
+	    padding: 1px;
+	    width: 120px;
+	    max-height: 120px;
+	    overflow: hidden;
+	    text-align: center;
+	    cursor: pointer;
+	    border: 1px solid #ccc;
+	    transition: all .3s linear;
+	}
+	img {
+	    max-width: 100%;
+	    border: 0 none;
+	}	
+</style>
+	<body>
+		
+		<!---nav-->
+		<include file="Public/nav"/>
+		<!---nav-->
+		<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				<!---sidebar-->
+					<include file="Public/sidebar"/>
+				<!---sidebar-->
+				</div>
+				<!--top-alert-->
+					<include file="Public/top-alert"/>
+				<!--top-alert-->
+					<div class="page-content">
+						<div class="page-header">
+							<h1>{:isset($info['id'])?'编辑':'新增'}后台菜单</h1>
+						</div><!-- /.page-header -->
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+							<form class="form-horizontal"  id="form"  action="{:U('')}" method="post" role="form">
+								<div class="tabbable">
+							        <div class="tab-content">
+							          <div class="tab-pane active" id="A">
+											<fieldset>
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">标题：</label>
+													<div class="col-sm-9">
+														<input type="text"  name="title" value="{$info.title|default=''}" class="col-xs-10 col-sm-5">
+														<span class="help-inline">
+															<span class="middle"><code>（用于后台显示的配置标题）</code></span>
+														</span>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">排序：</label>
+													<div class="col-sm-9">
+														<input type="text" name="sort" value="{$info.sort|default=0}" class="col-xs-10 col-sm-5">
+														<span class="help-inline">
+															<span class="middle"><code>（用于分组显示的顺序）</code></span>
+														</span>
+													</div>
+												</div>		
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">链接：</label>
+													<div class="col-sm-9">
+														<input type="text" name="url" value="{$info.url|default=''}" class="col-xs-10 col-sm-5">
+														<span class="help-inline">
+															<span class="middle"><code>（U函数解析的URL或者外链）</code></span>
+														</span>
+													</div>
+												</div>											
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">上级菜单：</label>
+													<div class="col-sm-9">
+														<select name="pid" class="col-xs-10 col-sm-5">
+										                    <volist name="Menus" id="menu">
+										                        <option value="{$menu.id}">{$menu.title_show}</option>
+										                    </volist>
+														</select>
+														<span class="help-inline">
+															<span class="middle"><code>（所属的上级菜单）</code></span>
+														</span>
+													</div>
+												</div>			
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">分组：</label>
+													<div class="col-sm-9">
+														<input type="text" name="group" value="{$info.group|default=''}" class="col-xs-10 col-sm-5">
+														<span class="help-inline">
+															<span class="middle"><code>（用于左侧分组二级菜单）</code></span>
+														</span>
+													</div>
+												</div>									
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">是否隐藏：</label>
+													<div class="col-sm-9">
+														<label class="radio-inline">
+														  <input type="radio" name="hide" value="1">是
+														</label>
+														<label class="radio-inline">
+														  <input type="radio" name="hide" value="0">否
+														</label>
+													</div>
+												</div>			
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">仅开发者模式可见：</label>
+													<div class="col-sm-9">
+														<label class="radio-inline">
+														  <input type="radio" name="is_dev" value="1">是
+														</label>
+														<label class="radio-inline">
+														  <input type="radio" name="is_dev" value="0">否
+														</label>
+													</div>
+												</div>	
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">说明：</label>
+													<div class="col-sm-9">
+														<input type="text" name="tip" value="{$info.tip|default=''}" class="col-xs-10 col-sm-5">
+														<span class="help-inline">
+															<span class="middle"><code>（菜单详细说明）</code></span>
+														</span>
+													</div>
+												</div>																										
+											</fieldset>
+							          </div>
+							        </div>
+							    </div>
+							    <div class="form-actions text-center">
+									<input type="hidden" name="id" value="{$info.id|default=''}">
+						            <button class="btn submit-btn btn-primary btn-sm ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+						            <button class="btn btn-primary btn-sm btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+							    </div>
+							</form>
+
+								<!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div><!-- /.main-content -->
+
+				<!-- /#ace-settings-container -->
+				<include file="Public/setting"/>
+				<!-- /#ace-settings-container -->
+				
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!---footer-->
+		<include file="Public/footer"/>
+		<!---footer-->
+
+		<!-- page specific plugin scripts -->
+		<!-- ace scripts -->
+
+		<script src="__ASSETS_JS__/ace-elements.min.js"></script>
+		<script src="__ASSETS_JS__/ace.min.js"></script>
+
+		<!-- inline scripts related to this page -->
+		<script type="text/javascript" charset="utf-8">
+	        Think.setValue("pid", {$info.pid|default = 0});
+	        Think.setValue("hide", {$info.hide|default = 0});
+	        Think.setValue("is_dev", {$info.is_dev|default = 0});
+		</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!---head-->
+		<include file="Public/head"/>
+		<!---head-->
+	</head>
+
+	<body>
+		<div class="jumppage_bg" style="display:none;"></div>
+		<div class="jumppage" style="display:none;">
+			<div class="t_1">提示信息</div>
+			<div class="tx1"></div>
+			<input type="button" class="btn2" id="Jq_sure" value="确认">
+			<input type="button" class="btn3" id="Jq_no" value="取消">
+		</div>
+		<!---nav-->
+		<include file="Public/nav"/>
+		<!---nav-->
+
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				<!---head-->
+					<include file="Public/sidebar"/>
+				<!---head-->
+				</div>
+				<!--top-alert-->
+					<include file="Public/top-alert"/>
+				<!--top-alert-->
+					<div class="page-content">
+						<div class="page-header">
+
+						</div><!-- /.page-header -->
+
+
+								<!-- PAGE CONTENT BEGINS -->
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="table-responsive">
+										<form class="form-horizontal" action="{:U('Category/listorders')}" method="post">
+											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+												<thead>
+													<tr>
+														<th class="center">
+															<label>
+																<input class="check-all" type="checkbox" />
+																<span class="lbl"></span>
+															</label>
+														</th>
+														<th>排序</th>
+														<th>ID</th>
+														<th>标题</th>
+														<th>类型</th>
+														<th class="hidden-480">发布时间</th>
+														<th>状态</th>
+														<th>点击</th>
+														<th>操作</th>
+													</tr>
+												</thead>
+												<tbody>		
+									                <volist name="list" id="data">
+									                    <tr>
+									                        <td class="center"><input class="ids" type="checkbox" value="{$data['id']}" name="ids[]"></td>
+															<td><input name=" " type="text" size="3" value="" class="input"></td>
+									                        <volist name="list_grids" id="grid">
+									                            <td>{:get_list_field($data,$grid)}</td>
+									                        </volist>
+									                    </tr>
+								               		 </volist>
+												</tbody>
+											</table>
+											<button type="submit" id="submit" class="btn btn-primary btn-sm js-ajax-submit ajax-post" target-form="form-horizontal">提交排序</button>
+											<button class="btn btn-default btn-sm ajax-post confirm" target-form="ids" url="{:U("Category/removeall")}">删 除</button>
+											</form>
+										</div><!-- /.table-responsive -->
+									</div><!-- /span -->
+								</div><!-- /row -->	
+				  </div><!-- /.main-content -->
+				<!-- /#ace-settings-container -->
+				<include file="Public/setting"/>
+				<!-- /#ace-settings-container -->
+				
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+		
+		<!---footer-->
+		<include file="Public/footer"/>
+		<!---footer-->
+
+		<!-- page specific plugin scripts -->
+		<!-- ace scripts -->
+
+		<script src="__ASSETS_JS__/ace-elements.min.js"></script>
+		<script src="__ASSETS_JS__/ace.min.js"></script>
+		<!--<script src="__ASSETS_JS__/common.js"></script>-->
+		<!-- inline scripts related to this page -->
+
+		<script type="text/javascript">
+			jQuery(function($) {
+				$('table th input:checkbox').on('click' , function(){
+					var that = this;
+					$(this).closest('table').find('tr > td:first-child input:checkbox')
+					.each(function(){
+						this.checked = that.checked;
+						$(this).closest('tr').toggleClass('selected');
+					});
+						
+				});
+			})
+			
+			function Jq_del(id){
+				var name = $('#data_'+id).attr("dataName");
+				$('.jumppage > .tx1').html('请确认删除'+'['+name+']');
+				$('.jumppage_bg, .jumppage').show();
+				$('#Jq_sure').click(function(){
+					var url = "__URL__/remove/id/"+id;
+					window.location.href = url;	
+					$(this).attr("disabled","disabled");			
+				});
+			};
+			$('#Jq_no').click(function(){
+				$('.jumppage_bg, .jumppage').hide();	
+			});
+		</script>
+</body>
+</html>

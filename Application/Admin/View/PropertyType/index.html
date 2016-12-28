@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!---head-->
+		<include file="Public/head"/>
+		<!---head-->
+	</head>
+
+	<body>
+		<!---nav-->
+		<include file="Public/nav"/>
+		<!---nav-->
+
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				<!---head-->
+					<include file="Public/sidebar"/>
+				<!---head-->
+				</div>
+				<!--top-alert-->
+					<include file="Public/top-alert"/>
+				<!--top-alert-->
+					<div class="page-content">
+						<div class="page-header">
+
+						</div><!-- /.page-header -->
+
+
+								<!-- PAGE CONTENT BEGINS -->
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="table-responsive">
+										<form class="form-horizontal" action="{:U('Category/listorders')}" method="post">
+											<table id="sample-table-1" class="table table-striped table-bordered table-condensed table-hover">
+												<thead>
+													<tr class="">
+														<th class="center"> <input class="check-all" type="checkbox"/></th>
+														<th>编号</th>
+														<th>名称</th>
+														<th>价格</th>
+														<th>类别</th>
+														<th>登记日期</th>
+														<th>操作</th>
+													</tr>
+												</thead>
+												<tbody>		
+													<notempty name="_list">
+														<volist name="_list" id="vo">
+														<tr>
+												            <td class="center"><input class="ids" type="checkbox" name="ids[]" value="{$vo.id}" /></td>
+															<td>{$vo.id} </td>
+															<td>{$vo.name}</td>
+															<td>{$vo.price}</td>
+															<td>{$vo.type}</td>
+															<td>
+																<span>{$vo.add_time}</span>
+												            </td>
+															<td>
+																<a title="编辑" href="{:U('GoodType/edit?id='.$vo['id'])}"><i class="icon-edit bigger-120"></i></a>
+																<a title="删除" href="{:U('GoodType/del?ids='.$vo['id'])}" class="confirm ajax-get"><i class="icon-trash bigger-120"></i></a>
+												            </td>
+														</tr>
+														</volist>
+														<else/>
+														<td colspan="7" class="text-center"> aOh! 暂时还没有内容! </td>
+													</notempty>	
+												</tbody>
+											</table>
+									        <a class="btn btn-sm btn-primary" href="{:U('Good/add')}">新 增</a>
+											<button class="btn btn-default btn-sm ajax-post confirm" target-form="ids" url="{:U("Good/del")}">删 除</button>
+											</form>
+										</div><!-- /.table-responsive -->
+									</div><!-- /span -->
+								</div><!-- /row -->	
+				  </div><!-- /.main-content -->
+				<!-- /#ace-settings-container -->
+				<include file="Public/setting"/>
+				<!-- /#ace-settings-container -->
+				
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		<!--弹出框-->
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+		
+		<!---footer-->
+		<include file="Public/footer"/>
+		<!---footer-->
+
+		<!-- page specific plugin scripts -->
+		<!-- ace scripts -->
+
+		<script src="__ASSETS_JS__/ace-elements.min.js"></script>
+		<script src="__ASSETS_JS__/ace.min.js"></script>
+		<!--<script src="__ASSETS_JS__/common.js"></script>-->
+		<!-- inline scripts related to this page -->
+
+		<script type="text/javascript">
+				function Edit_Good(id){
+					$('#myModal').modal();
+				}
+
+		</script>
+</body>
+</html>

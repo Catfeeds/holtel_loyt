@@ -1,0 +1,121 @@
+@charset "utf-8";
+.download {
+    margin: 120px auto 100px auto;
+    padding: 20px 0;
+}
+
+.left-colum {
+    
+}
+.left-colum a{
+    text-decoration: none;
+    padding: 0 5px;
+}
+.left-colum a:hover{
+    color: red;    
+}
+.left-colum ul{
+    margin: 20px auto;
+    padding: 0; 
+    font-size: 14px;
+}
+.left-colum ul li{
+  display: block;
+  list-style-type:none;
+  padding: 10px 0;
+  border-bottom: 1px solid #ece7e7;
+  text-align: center;
+  letter-spacing: 1px;
+}
+.left-colum ul li a.act{
+   color:red;
+}
+.left-colum .left-next{
+    margin: 30px auto;
+}
+.left-colum img{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+.about-content {
+    color: #666;
+    font-size: 15px;
+    padding: 20px 0 0 0;
+    float: left;
+}
+.about-content ul{
+    list-style: none;
+}
+.about-content li{
+    list-style-type: none;
+    height: 35px;
+    line-height: 35px;
+    height: 35px;
+    float: left;
+    width: 100%;
+    padding: 5px 0 5px 20px;
+    display: block;
+    margin: 5px 0 0 0 ;
+}
+.about-content li a{
+    display: block;
+    float: left;
+    width: 100%;
+    height: 35px;
+}
+.about-content li span:hover{
+    color: red;
+}
+.about-content li a b{
+    float: left;
+    background: url(../images/xz1.jpg) no-repeat left center;
+    padding-left: 24px;
+    width: 75%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #333;
+}
+.about-content li a span{
+    float: right;
+    padding-right: 20px;
+}
+.about-content .page{
+    position: relative;
+    height: 45px;
+    line-height: 45px;
+    text-align: center!important;
+    margin: 40px auto;
+}
+.about-content .page a{
+    margin: 0 10px 0 0;
+    line-height: 45px;
+    display: inline-block;
+}
+.about-content .page a:hover{
+    background:none;
+    color: red;
+}
+.about-content .page a.style-page:hover{
+    border: 1px solid red;
+}
+.about-content .page a.active{
+    border: 1px solid red !important;
+    background: none;
+    color: #666 !important;
+}
+.about-content .page a.style-page{
+    border: 1px solid #ccc;
+    width: 40px;
+    height: 40px;
+}
+
+
+
+
+
+
+
+
+

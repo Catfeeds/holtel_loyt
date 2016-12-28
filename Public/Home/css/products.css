@@ -1,0 +1,139 @@
+@charset "utf-8";
+.products {
+    margin: 120px auto 100px auto;
+    padding: 8px 0;
+    background: #f5f5f5;
+    position: relative;
+}
+.products span a{
+    padding: 0 5px;
+    outline: none;
+
+}
+.products span a:hover{
+    color:red;
+}
+.products ul{
+    margin: 20px auto;
+    padding: 0;
+}
+.products ul li{
+    display:inline-block;
+    float: left;
+    list-style-type: none;
+    background: #ffffff;
+    margin: 0 25px 25px 0;
+    transition: all 0.2s linear;
+    -webkit-transition: all 0.2s linear;
+}
+.products ul li:hover{
+    /*box-shadow: 0 15px 30px rgba(0,0,0,1);
+    -webkit-box-shadow:0 15px 30px rgba(0,0,0,1);
+    -moz-box-shadow: 0 15px 30px rgba(51,51,51,1);*/
+    transform: translate3d(0,-2px,0);
+    -webkit-transform: translate3d(0,-2px,0);
+    -moz-transform: translate3d(0,-2px,0);
+    box-shadow:0 15px 30px  #dedada;
+}
+.products ul li{
+    width: 260px;
+    height: 320px;
+    display: block;
+}
+.products ul li a img{
+    width: 260px;
+    height: 220px;
+
+}
+.products .page{
+    position: relative;
+    height: 45px;
+    line-height: 45px;
+    text-align: center!important;
+    margin: 40px auto;
+}
+.products .page a{
+    margin: 0 10px 0 0;
+    line-height: 45px;
+    display: inline-block;
+}
+.products .page a:hover{
+    background:none;
+    color: red;
+}
+.products .page a.style-page:hover{
+    border: 1px solid red;
+}
+.products .page a.active{
+    border: 1px solid red !important;
+    background: none;
+    color: #666 !important;
+}
+.products .page a.style-page{
+    border: 1px solid #ccc;
+    width: 40px;
+    height: 40px;
+}
+.up-content{
+    position: relative;
+    font-size: 12px;
+    text-align: center;
+    margin: 15px  auto 0 auto;
+    background: red;
+    color: #ffffff;
+    /*height: 0px;*/
+    margin-bottom: 0px;
+    padding: 5px 0;
+    cursor: pointer;
+    display: none;
+}
+.up-content p{
+    line-height: 18px;
+    letter-spacing: 1px;
+}
+.products ul li .img-word{
+    text-align: center;
+    cursor: pointer;
+}
+.Category a.act{
+   color:red;
+}
+.Category {
+    background: #ffffff;
+    margin: 10px auto;
+    padding: 5px 0 0 10px;
+    /*height: 60px;*/
+}
+.Category dl{
+   padding: 20px 0; 
+}
+.Category dl dd,.Category dl dt{
+    display: block;
+    float: left;
+}
+.Category dl dd{
+     margin: 0 40px 0 0;
+}
+.Category dl dt{
+    color: #b0b0b0;  
+    font-weight: normal;
+    width: 80px;
+    text-align: left;
+}
+.Category dl a:hover{
+  color:red;   
+}
+.Category dl a.more-Category{
+    position: relative;
+    float: right;
+    text-align: right;
+    font-size: 14px;
+    font-weight: normal;
+    padding-right: 25px;
+    display: block;
+}
+
+.Category dl a.more-Category span{
+    padding: 0 0 0 10px;
+
+}

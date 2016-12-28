@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!---head-->
+		<include file="Public/head"/>
+		<!---head-->
+	</head>
+
+	<body>
+		<div class="jumppage_bg" style="display:none;"></div>
+		<div class="jumppage" style="display:none;">
+			<div class="t_1">提示信息</div>
+			<div class="tx1"></div>
+			<input type="button" class="btn2" id="Jq_sure" value="确认">
+			<input type="button" class="btn3" id="Jq_no" value="取消">
+		</div>
+		<!---nav-->
+		<include file="Public/nav"/>
+		<!---nav-->
+
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				<!---head-->
+					<include file="Public/sidebar"/>
+				<!---head-->
+				</div>
+				<!--top-alert-->
+					<include file="Public/top-alert"/>
+				<!--top-alert-->
+					<div class="page-content">
+						<div class="page-header">
+
+						</div><!-- /.page-header -->
+
+
+								<!-- PAGE CONTENT BEGINS -->
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="table-responsive">
+										<form class="form-horizontal" action="{:U('Category/listorders')}" method="post">
+											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+												<thead>
+													<tr>
+														<th class="center">
+															<label>
+																<input class="check-all" type="checkbox"/>
+																<span class="lbl"></span>
+															</label>
+														</th>
+														<th>编号</th>
+														<th>标识</th>
+														<th>名称</th>
+														<th>创建时间</th>
+														<th>状态</th>
+														<th>操作</th>
+													</tr>
+												</thead>
+												<tbody>		
+													<notempty name="_list">
+														<volist name="_list" id="vo">
+														<tr>
+												            <td class="center"><input class="ids" type="checkbox" name="ids[]" value="{$vo.id}" /></td>
+															<td>{$vo.id} </td>
+															<td>{$vo.name}</td>
+															<td><a data-id="{$vo.id}" href="{:U('model/edit?id='.$vo['id'])}">{$vo.title}</a></td>
+															<td><span>{$vo.create_time|time_format}</span></td>
+															<td>{$vo.status_text}</td>
+															<td>
+																<a href="{:U('think/lists?model='.$vo['name'])}">数据</a>
+																<a href="{:U('model/setstatus?ids='.$vo['id'].'&status='.abs(1-$vo['status']))}" class="ajax-get">{$vo.status|show_status_op}</a>
+																<a href="{:U('model/edit?id='.$vo['id'])}">编辑</a>
+																<a href="{:U('model/del?ids='.$vo['id'])}" class="confirm ajax-get">删除</a>
+												            </td>
+														</tr>
+														</volist>
+														<else/>
+														<td colspan="7" class="text-center"> aOh! 暂时还没有内容! </td>
+													</notempty>	
+												</tbody>
+											</table>
+									        <a class="btn btn-sm btn-primary" href="{:U('Model/add')}">新 增</a>
+									        <button class="btn btn-sm btn-primary ajax-post" target-form="ids" url="{:U('Model/setStatus',array('status'=>1))}">启 用</button>
+									        <button class="btn btn-sm btn-primary ajax-post" target-form="ids" url="{:U('Model/setStatus',array('status'=>0))}">禁 用</button>
+									        <a class="btn btn-sm btn-primary" href="{:U('Model/generate')}">生 成</a>
+											<button class="btn btn-default btn-sm ajax-post confirm" target-form="ids" url="{:U("Model/del")}">删 除</button>
+											</form>
+										</div><!-- /.table-responsive -->
+									</div><!-- /span -->
+								</div><!-- /row -->	
+				  </div><!-- /.main-content -->
+				<!-- /#ace-settings-container -->
+				<include file="Public/setting"/>
+				<!-- /#ace-settings-container -->
+				
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+		
+		<!---footer-->
+		<include file="Public/footer"/>
+		<!---footer-->
+
+		<!-- page specific plugin scripts -->
+		<!-- ace scripts -->
+
+		<script src="__ASSETS_JS__/ace-elements.min.js"></script>
+		<script src="__ASSETS_JS__/ace.min.js"></script>
+		<!--<script src="__ASSETS_JS__/common.js"></script>-->
+		<!-- inline scripts related to this page -->
+
+		<script type="text/javascript">
+			jQuery(function($) {
+				$('table th input:checkbox').on('click' , function(){
+					var that = this;
+					$(this).closest('table').find('tr > td:first-child input:checkbox')
+					.each(function(){
+						this.checked = that.checked;
+						$(this).closest('tr').toggleClass('selected');
+					});
+						
+				});
+				
+		    	$("#search").click(function(){
+		    		var url = $(this).attr('url');
+		    		var status = $('select[name=status]').val();
+		    		var search = $('input[name=search]').val();
+		    		if(status != ''){
+		    			url += '/status/' + status;
+		    		}
+		    		if(search != ''){
+		    			url += '/search/' + search;
+		    		}
+		    		window.location.href = url;
+		    	});				
+			})
+			
+			function Jq_del(id){
+				var name = $('#data_'+id).attr("dataName");
+				$('.jumppage > .tx1').html('请确认删除'+'['+name+']');
+				$('.jumppage_bg, .jumppage').show();
+				$('#Jq_sure').click(function(){
+					var url = "__URL__/remove/id/"+id;
+					window.location.href = url;	
+					$(this).attr("disabled","disabled");			
+				});
+			};
+			$('#Jq_no').click(function(){
+				$('.jumppage_bg, .jumppage').hide();	
+			});
+		</script>
+</body>
+</html>

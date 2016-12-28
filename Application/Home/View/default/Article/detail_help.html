@@ -1,0 +1,52 @@
+<extend name="Base/common"/>
+<block name="pageHeader">
+	 <link rel="stylesheet" href="__CSS__/news_info.css">
+</block>
+<block name="body">
+<div style="clear:both;"></div>
+<div class="news">
+    <div class="container column-content">
+        <div class="row">
+            <div class="col-xs-3 left-colum">
+                <span><a href="">首页</a>&gt;<a href="">{$catesuper[0]['title']}</a>&gt;<a href="">{$category.title}</a></span>
+                <ul>
+                	<volist name="listnew" id="data">
+                   		 <li><a href="{:U('Article/lists?category='.$catesuper[0]['name'].'&category_id='.$data['id'])}" class="<if condition="($category['id'] eq $data['id'])">act</if>">{$data.title}</a></li>
+					</volist>
+                </ul>
+                <div class="left-next" style="padding:2px 0;border-bottom:1px dashed #d9d4d4;">
+                    <p style="font-size:12px;">产品咨询 / 购买热线 <span style="color:red">400-6768-678</span></p>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                         <img src="__IMG__/DownloadApp.png" alt="app下载" style="width:70px;height:70px;">
+                    </div>
+                    <div class="col-xs-8" style="border-bottom:1px dashed #d9d4d4;border-top:1px dashed #d9d4d4;">
+                        <h4 style="font-weight:bold;">免费下载APP</h4>
+                        <span style="padding:15px 0;color:red;">激情体验瓯宝智能家居</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-9 solution-content">
+                   <div class="title">
+                    <h1>{$info.title}</h1>
+                    <span>发布者：瓯宝 &nbsp;&nbsp;&nbsp;&nbsp;浏览次数:{$info.view} &nbsp;&nbsp;&nbsp;&nbsp;更新时间:{$info.create_time|date='Y-m-d H:i',###}</span>
+                    <div class="bshare-custom">    
+                    <a title="分享到微信" class="bshare-weixin"></a>    
+                    <a title="分享到新浪微博" class="bshare-sinaminiblog"></a>    
+                    <a title="分享到QQ空间" class="bshare-qzone"></a>   
+                    <a title="分享到QQ" class="bshare-qqim"></a>    
+                    <script type="text/javascript" src="js/share.js"></script></div>
+                  </div>
+                  <div class="content">
+						{$info.content}
+                  </div>
+                  <div class="page_">
+                      <button class="btn btn-danger" onclick="javascript:history.go(-1);"  type="submit" value="返回">返回</button>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</block>

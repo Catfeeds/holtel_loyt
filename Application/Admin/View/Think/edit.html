@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!---head-->
+		<include file="Public/head"/>
+		<!---head-->
+	</head>
+<style>
+	.upload-img-box .upload-pre-item {
+	    padding: 1px;
+	    width: 120px;
+	    max-height: 120px;
+	    overflow: hidden;
+	    text-align: center;
+	    cursor: pointer;
+	    border: 1px solid #ccc;
+	    transition: all .3s linear;
+	}
+	img {
+	    max-width: 100%;
+	    border: 0 none;
+	}	
+</style>
+	<body>
+		
+		<!---nav-->
+		<include file="Public/nav"/>
+		<!---nav-->
+		<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				<!---sidebar-->
+					<include file="Public/sidebar"/>
+				<!---sidebar-->
+				</div>
+				<!--top-alert-->
+				<include file="Public/top-alert"/>
+				<!--top-alert-->
+					<div class="page-content">
+						<div class="page-header">
+							<h1>编辑 [{$model['title']}]</h1>
+						</div><!-- /.page-header -->
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+							<ul class="nav nav-tabs">
+								<volist name=":parse_config_attr($model['field_group'])" id="group">
+									<li <eq name="key" value="1">class="active"</eq>><a href="#tab{$key}" data-toggle="tab">{$group}</a></li>
+								</volist>
+						    </ul>							
+							<form id="form" action="{:U('edit?model='.$model['id'])}" method="post" class="form-horizontal">
+								<div class="tabbable">
+							        <div class="tab-content">
+							        <volist name=":parse_config_attr($model['field_group'])" id="group">
+							          <div class="tab-pane <eq name="key" value="1">active</eq>" id="tab{$key}">
+							          	<volist name="fields[$key]" id="field">
+							          		<if condition="$field['is_show'] == 1 || $field['is_show'] == 3">
+											<fieldset>
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">{$field['title']}：</label>
+													<div class="col-sm-9">
+														<switch name="field.type">
+															   <case value="num">
+                   									             <input type="text" class="text input-mid" name="{$field.name}" value="{$data[$field['name']]}">
+                     										   </case>
+										                        <case value="string">
+									                                <input type="text" class="text input-large col-xs-10 col-sm-5" name="{$field.name}" value="{$data[$field['name']]}">
+									                            </case>
+									                            <case value="textarea">
+									                                <textarea name="{$field.name}" rows="5" class="col-xs-10 col-sm-5">{$data[$field['name']]}</textarea>
+									                            </case>
+									                            <case value="date">
+									                                <input type="text" name="{$field.name}" class="text input-mid date" value="{$data[$field['name']]|date='Y-m-d',###}" placeholder="请选择日期" />
+									                            </case>
+									                            <case value="datetime">
+									                                <input type="text" name="{$field.name}" class="text input-mid time" value="{$data[$field['name']]|date='Y-m-d H:i',###}" placeholder="请选择时间" />
+									                            </case>			
+												                <case value="bool">
+									                                <select name="{$field.name}">
+									                                    <volist name=":parse_field_attr($field['extra'])" id="vo">
+									                                        <option value="{$key}" <eq name="data[$field['name']]" value="$key">selected</eq>>{$vo}</option>
+									                                    </volist>
+									                                </select>
+									                            </case>		
+						                          				  <case value="select">
+										                                <select name="{$field.name}" class="col-xs-10 col-sm-5">
+										                                    <volist name=":parse_field_attr($field['extra'])" id="vo">
+										                                        <option value="{$key}" <eq name="data[$field['name']]" value="$key">selected</eq>>{$vo}</option>
+										                                    </volist>
+										                                </select>
+										                            </case>
+										                            <case value="radio">
+										                                <volist name=":parse_field_attr($field['extra'])" id="vo">
+										                                	<label class="radio radio-inline">
+										                                    <input type="radio" value="{$key}" name="{$field.name}" <eq name="data[$field['name']]" value="$key">checked="checked"</eq>>{$vo}
+										                                	</label>
+										                                </volist>
+										                            </case>
+										                            <case value="checkbox">
+										                                <volist name=":parse_field_attr($field['extra'])" id="vo">
+										                                	<label class="checkbox checkbox-inline">
+										                                    <input type="checkbox" value="{$key}" name="{$field.name}[]" <in name="key" value="$data[$field['name']]" >checked="checked"</in>>{$vo}
+										                                	</label>
+										                                </volist>
+										                            </case>			
+												                <case value="editor">
+									                                <label class="textarea">
+									                                <textarea name="{$field.name}">{$data[$field['name']]}</textarea>
+									                                {:hook('adminArticleEdit', array('name'=>$field['name'],'value'=>$data[$field['name']]))}
+									                                </label>
+									                            </case>
+									                            <case value="picture">
+									                                <div class="controls">
+																		<input type="file" id="upload_picture_{$field.name}">
+																		<input type="hidden" name="{$field.name}" id="cover_id_{$field.name}" value="{$data[$field['name']]}"/>
+																		<div class="upload-img-box">
+																		<notempty name="data[$field['name']]">
+																			<div class="upload-pre-item"><img src="{$data[$field['name']]|get_cover='path'}"/></div>
+																		</notempty>
+																		</div>
+																	</div>
+																	<script type="text/javascript">
+																	//上传图片
+																    /* 初始化上传插件 */
+																	$("#upload_picture_{$field.name}").uploadify({
+																        "height"          : 30,
+																        "swf"             : "__STATIC__/uploadify/uploadify.swf",
+																        "fileObjName"     : "download",
+																        "buttonText"      : "上传图片",
+																        "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+																        "width"           : 120,
+																        'removeTimeout'	  : 1,
+																        'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+																        "onUploadSuccess" : uploadPicture{$field.name},
+									                                    'onFallback' : function() {
+									                                        alert('未检测到兼容版本的Flash.');
+									                                    }
+																    });
+																	function uploadPicture{$field.name}(file, data){
+																    	var data = $.parseJSON(data);
+																    	var src = '';
+																        if(data.status){
+																        	$("#cover_id_{$field.name}").val(data.id);
+																        	src = data.url || '__ROOT__' + data.path;
+																        	$("#cover_id_{$field.name}").parent().find('.upload-img-box').html(
+																        		'<div class="upload-pre-item"><img src="' + src + '"/></div>'
+																        	);
+																        } else {
+																        	updateAlert(data.info);
+																        	setTimeout(function(){
+																                $('#top-alert').find('button').click();
+																                $(that).removeClass('disabled').prop('disabled',false);
+																            },1500);
+																        }
+																    }
+																	</script>
+									                            </case>
+									                            <case value="file">
+																	<div class="controls">
+																		<input type="file" id="upload_file_{$field.name}">
+																		<input type="hidden" name="{$field.name}" value="{$data[$field['name']]}"/>
+																		<div class="upload-img-box">
+																			<present name="data[$field['name']]">
+																				<div class="upload-pre-file"><span class="upload_icon_all"></span>{$data[$field['name']]|get_table_field=###,'id','name','File'}</div>
+																			</present>
+																		</div>
+																	</div>
+																	<script type="text/javascript">
+																	//上传图片
+																    /* 初始化上传插件 */
+																	$("#upload_file_{$field.name}").uploadify({
+																        "height"          : 30,
+																        "swf"             : "__STATIC__/uploadify/uploadify.swf",
+																        "fileObjName"     : "download",
+																        "buttonText"      : "上传附件",
+																        "uploader"        : "{:U('File/upload',array('session_id'=>session_id()))}",
+																        "width"           : 120,
+																        'removeTimeout'	  : 1,
+																        "onUploadSuccess" : uploadFile{$field.name},
+									                                    'onFallback' : function() {
+									                                        alert('未检测到兼容版本的Flash.');
+									                                    }
+																    });
+																	function uploadFile{$field.name}(file, data){
+																		var data = $.parseJSON(data);
+																        if(data.status){
+																        	var name = "{$field.name}";
+																        	$("input[name="+name+"]").val(data.data);
+																        	$("input[name="+name+"]").parent().find('.upload-img-box').html(
+																        		"<div class=\"upload-pre-file\"><span class=\"upload_icon_all\"></span>" + data.info + "</div>"
+																        	);
+																        } else {
+																        	updateAlert(data.info);
+																        	setTimeout(function(){
+																                $('#top-alert').find('button').click();
+																                $(that).removeClass('disabled').prop('disabled',false);
+																            },1500);
+																        }
+																    }
+																	</script>
+									                            </case>																							   
+															 <default/>
+														<input type="text" class="text input-large col-xs-10 col-sm-5" name="{$field.name}" value="{$data[$field['name']]}">
+														</switch>
+														<notempty name="field['remark']">
+															<span class="help-inline">
+																<span class="middle"><code>（{$field['remark']}）</code></span>
+															</span>
+														</notempty>
+													</div>
+												</div>							
+											</fieldset>
+											</if>
+										 </volist>
+							          </div>
+									 </volist>
+							        </div>
+							    </div>
+							    <div class="form-actions text-center">
+									<input type="hidden" name="id" value="{$data.id}">
+							     	<button class="btn btn-primary btn-sm js-ajax-submit ajax-post" type="submit" id="submit" target-form="form-horizontal">提交</button>
+							      	<button class="btn btn-default btn-sm" onclick="javascript:history.back(-1);return false;">返 回</button>
+							    </div>
+							</form>
+
+								<!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div><!-- /.main-content -->
+
+				<!-- /#ace-settings-container -->
+				<include file="Public/setting"/>
+				<!-- /#ace-settings-container -->
+				
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!---footer-->
+		<include file="Public/footer"/>
+		<!---footer-->
+
+		<!-- page specific plugin scripts -->
+		<!-- ace scripts -->
+
+		<script src="__ASSETS_JS__/ace-elements.min.js"></script>
+		<script src="__ASSETS_JS__/ace.min.js"></script>
+
+		<!-- inline scripts related to this page -->
+		<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+		<php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+		<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+		<script type="text/javascript">
+		/*$('#submit').click(function(){
+		    $('#form').submit();
+		});*/
+		
+		$(function(){
+			$('.time').datetimepicker({
+		        format: 'yyyy-mm-dd hh:ii',
+		        language:"zh-CN",
+		        minView:2,
+		        autoclose:true
+		    });
+		    $('.date').datetimepicker({
+		        format: 'yyyy-mm-dd',
+		        language:"zh-CN",
+		        minView:2,
+		        autoclose:true
+		    });
+		    showTab();
+		});
+		</script>
+</body>
+</html>

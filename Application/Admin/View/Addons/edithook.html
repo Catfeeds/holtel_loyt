@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!---head-->
+		<include file="Public/head"/>
+		<!---head-->
+	</head>
+<style>
+	.upload-img-box .upload-pre-item {
+	    padding: 1px;
+	    width: 120px;
+	    max-height: 120px;
+	    overflow: hidden;
+	    text-align: center;
+	    cursor: pointer;
+	    border: 1px solid #ccc;
+	    transition: all .3s linear;
+	}
+	img {
+	    max-width: 100%;
+	    border: 0 none;
+	}	
+	.dragsort {
+		width:400px;
+		list-style: none;
+	}
+	.dragsort li{
+	   border: 1px solid #eee;
+	   overflow: hidden;
+	   height: 30px;
+       line-height: 30px;
+	   margin-bottom:10px;
+	}
+	.dragsort li b {
+	    display: none;
+	    float: right;
+	    padding: 0 6px;
+	    font-weight: bold;
+	    color: #000;
+	}
+}
+</style>
+	<body>
+		
+		<!---nav-->
+		<include file="Public/nav"/>
+		<!---nav-->
+		<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				<!---sidebar-->
+					<include file="Public/sidebar"/>
+				<!---sidebar-->
+				</div>
+				<!--top-alert-->
+					<include file="Public/top-alert"/>
+				<!--top-alert-->
+					<div class="page-content">
+						<div class="page-header">
+							<h1><present name="data">编辑<else />新增</present>钩子</h1>
+						</div><!-- /.page-header -->
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+							<form class="form-horizontal" action="{:U('updateHook')}" method="post">
+								<div class="tabbable">
+							        <div class="tab-content">
+							          <div class="tab-pane active" id="A">
+											<fieldset>
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">钩子名称：</label>
+													<div class="col-sm-9">
+														<input type="text"  value="{$data.name}" name="name" class="col-xs-10 col-sm-5">
+														<span class="help-inline">
+															<span class="middle"><code>（需要在程序中先添加钩子，否则无效）</code></span>
+														</span>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">钩子描述：</label>
+													<div class="col-sm-9">
+														<textarea name="description"  rows="5" class="col-xs-10 col-sm-5">{$data.description}</textarea>
+														<span class="help-inline">
+															<span class="middle"><code>（钩子的描述信息）</code></span>
+														</span>
+													</div>
+												</div>											
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">钩子类型：</label>
+													<div class="col-sm-9">
+														<select name="type" class="col-xs-10 col-sm-5">
+															<volist name=":C('HOOKS_TYPE')" id="vo">
+																<option value="{$key}" <eq name="data.type" value="$key"> selected</eq>>{$vo}</option>
+															</volist>
+														</select>
+														<span class="help-inline">
+															<span class="middle"><code>（区分钩子的主要用途）</code></span>
+														</span>
+													</div>
+												</div>		
+												<present name="data">								
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right">钩子挂载的插件排序：</label>
+													<div class="col-sm-9">
+														<input type="hidden" name="addons" value="{$data.addons}"  class="col-xs-10 col-sm-5" readonly>
+															<empty name="data.addons">
+															暂无插件，无法排序
+															<else />
+															<ul id="sortUl" class="dragsort">
+																<volist name=":explode(',',$data['addons'])" id="addons_vo">
+																	<li class="getSort"><b>&times;</b><em>{$addons_vo}</em></li>
+																</volist>
+															</ul>
+															<script type="text/javascript">
+																$(function(){
+																	$("#sortUl").dragsort({
+											                            dragSelector:'li',
+											                            placeHolderTemplate: '<li class="draging-place">&nbsp;</li>',
+											                            dragEnd:function(){
+											                            	updateVal();
+											                            }
+											                        });
+										
+																	$('#sortUl li b').click(function(){
+										                            	$(this).parent().remove();
+										                            	updateVal();
+										                            });
+										
+																	// 更新排序后的隐藏域的值
+											                        function updateVal() {
+											                        	var sortVal = [];
+										                            	$('#sortUl li').each(function(){
+										                            		sortVal.push($('em',this).text());
+										                            	});
+										                                $("input[name='addons']").val(sortVal.join(','));
+											                        }
+																})
+															</script>
+															</empty>
+														<span class="help-inline">
+															<span class="middle"><code>（拖动后保存顺序，影响同一个钩子挂载的插件执行先后顺序）</code></span>
+														</span>
+													</div>
+												</div>	
+												</present>																											
+											</fieldset>
+							          </div>
+							        </div>
+							    </div>
+							    <div class="form-actions text-center">
+							    	<input type="hidden" name="id" value="{$data.id}">
+									<button type="submit" class="btn submit-btn btn-primary btn-sm ajax-post" target-form="form-horizontal">确 定</button>
+									<button class="btn btn-primary btn-sm btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+							    </div>
+							</form>
+
+								<!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div><!-- /.main-content -->
+
+				<!-- /#ace-settings-container -->
+				<include file="Public/setting"/>
+				<!-- /#ace-settings-container -->
+				
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!---footer-->
+		<include file="Public/footer"/>
+		<!---footer-->
+
+		<!-- page specific plugin scripts -->
+		<!-- ace scripts -->
+
+		<script src="__ASSETS_JS__/ace-elements.min.js"></script>
+		<script src="__ASSETS_JS__/ace.min.js"></script>
+		<present name="data">
+			<script type="text/javascript" src="__STATIC__/jquery.dragsort-0.5.1.min.js"></script>
+		</present>
+		<!-- inline scripts related to this page -->
+		<script type="text/javascript" charset="utf-8">
+		</script>
+</body>
+</html>
