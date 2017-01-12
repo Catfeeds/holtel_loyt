@@ -37,7 +37,7 @@
 						<li class="{$index_active}">
 							<a href="{:U('Index/index')}">
 								<i class="icon-dashboard"></i>
-								<span class="menu-text"> 控制台 </span>
+								<span class="menu-text"> 房态表 </span>
 							</a>
 						</li>
 						<li class="{$table_active}">
@@ -156,6 +156,30 @@
 							</ul>
 						</li>
 						
+						<li class="{$Guest_room_type_active}">
+							<a href="#" class="dropdown-toggle">
+								<i class="icon-cogs"></i>
+								<span class="menu-text"> 系统设置 </span>
+
+								<b class="arrow icon-angle-down"></b>
+							</a>
+
+							<ul class="submenu">
+								<li class="{$Guest_room_type_index}">
+									<a href="{:U('GuestRoomType/index')}">
+										<i class="icon-double-angle-right"></i>
+										房型定义
+									</a>
+								</li>
+								
+								<li class="{$Config_index}">
+									<a href="{:U('Config/index')}">
+										<i class="icon-double-angle-right"></i>
+										房态项目
+									</a>
+								</li>								
+							</ul>
+						</li>						
 						<li class="{$Database_active}">
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-cloud"></i>

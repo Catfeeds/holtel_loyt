@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2016-12-28 17:10:09
+Date: 2017-01-12 17:23:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -76,28 +76,6 @@ INSERT INTO `guest_room_set` VALUES ('116', '普通三人间', '3', '有电视',
 INSERT INTO `guest_room_set` VALUES ('117', '标准三人间', '3', '有电视，空调', '预订', '', '3', '817', '3');
 INSERT INTO `guest_room_set` VALUES ('118', '标准三人间', '3', '有电视，空调', '换出', '', '3', '818', '3');
 INSERT INTO `guest_room_set` VALUES ('119', '标准三人间', '3', '有电视，空调', '预订', '', '3', '819', '3');
-
--- ----------------------------
--- Table structure for guest_room_type
--- ----------------------------
-DROP TABLE IF EXISTS `guest_room_type`;
-CREATE TABLE `guest_room_type` (
-  `Type_Name` varchar(12) NOT NULL COMMENT '客房类型',
-  `Price` varchar(12) DEFAULT NULL COMMENT '价格',
-  `Amount_Bed` varchar(12) DEFAULT NULL COMMENT '床数',
-  `Amount_People` varchar(12) DEFAULT NULL COMMENT '额定人数',
-  PRIMARY KEY (`Type_Name`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of guest_room_type
--- ----------------------------
-INSERT INTO `guest_room_type` VALUES ('标准单人间', '78', '1', '1');
-INSERT INTO `guest_room_type` VALUES ('标准三人间', '168', '3', '3');
-INSERT INTO `guest_room_type` VALUES ('标准双人间', '128', '2', '2');
-INSERT INTO `guest_room_type` VALUES ('普通单人间', '68', '1', '1');
-INSERT INTO `guest_room_type` VALUES ('普通三人间', '138', '3', '3');
-INSERT INTO `guest_room_type` VALUES ('普通双人间', '118', '2', '2');
 
 -- ----------------------------
 -- Table structure for mobile
@@ -21029,7 +21007,7 @@ CREATE TABLE `tp_action_log` (
   KEY `action_ip_ix` (`action_ip`),
   KEY `action_id_ix` (`action_id`),
   KEY `user_id_ix` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=258 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表';
+) ENGINE=MyISAM AUTO_INCREMENT=260 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表';
 
 -- ----------------------------
 -- Records of tp_action_log
@@ -21274,6 +21252,8 @@ INSERT INTO `tp_action_log` VALUES ('254', '1', '1', '2130706433', 'member', '1'
 INSERT INTO `tp_action_log` VALUES ('255', '1', '1', '2130706433', 'member', '1', 'admin在2016-12-12 09:19登录了后台', '1', '1481505587');
 INSERT INTO `tp_action_log` VALUES ('256', '1', '1', '2130706433', 'member', '1', 'admin在2016-12-13 16:47登录了后台', '1', '1481618857');
 INSERT INTO `tp_action_log` VALUES ('257', '1', '1', '2130706433', 'member', '1', 'admin在2016-12-28 14:34登录了后台', '1', '1482906867');
+INSERT INTO `tp_action_log` VALUES ('258', '1', '1', '2130706433', 'member', '1', 'admin在2017-01-11 11:45登录了后台', '1', '1484106330');
+INSERT INTO `tp_action_log` VALUES ('259', '1', '1', '2130706433', 'member', '1', 'admin在2017-01-12 11:05登录了后台', '1', '1484190359');
 
 -- ----------------------------
 -- Table structure for tp_addons
@@ -21966,6 +21946,30 @@ INSERT INTO `tp_good_type` VALUES ('4', '饮料', '2016-12-12 15:12');
 INSERT INTO `tp_good_type` VALUES ('5', '餐类', '2016-12-12 15:15');
 
 -- ----------------------------
+-- Table structure for tp_guest_room_type
+-- ----------------------------
+DROP TABLE IF EXISTS `tp_guest_room_type`;
+CREATE TABLE `tp_guest_room_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type_name` varchar(12) NOT NULL COMMENT '客房类型',
+  `price` varchar(12) DEFAULT NULL COMMENT '价格',
+  `amount_bed` varchar(12) DEFAULT NULL COMMENT '床数',
+  `amount_people` varchar(12) DEFAULT NULL COMMENT '额定人数',
+  PRIMARY KEY (`id`),
+  KEY `type_name` (`type_name`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tp_guest_room_type
+-- ----------------------------
+INSERT INTO `tp_guest_room_type` VALUES ('1', '标准单人间', '78', '1', '1');
+INSERT INTO `tp_guest_room_type` VALUES ('2', '标准三人间', '168', '3', '3');
+INSERT INTO `tp_guest_room_type` VALUES ('3', '标准双人间', '128', '2', '2');
+INSERT INTO `tp_guest_room_type` VALUES ('4', '普通单人间', '68', '1', '1');
+INSERT INTO `tp_guest_room_type` VALUES ('5', '普通三人间', '138', '3', '3');
+INSERT INTO `tp_guest_room_type` VALUES ('6', '普通双人间', '118', '2', '2');
+
+-- ----------------------------
 -- Table structure for tp_hooks
 -- ----------------------------
 DROP TABLE IF EXISTS `tp_hooks`;
@@ -22021,7 +22025,7 @@ CREATE TABLE `tp_member` (
 -- ----------------------------
 -- Records of tp_member
 -- ----------------------------
-INSERT INTO `tp_member` VALUES ('1', 'admin', '0', '0000-00-00', '', '240', '67', '0', '1472733337', '2130706433', '1482906867', '1');
+INSERT INTO `tp_member` VALUES ('1', 'admin', '0', '0000-00-00', '', '250', '69', '0', '1472733337', '2130706433', '1484190359', '1');
 INSERT INTO `tp_member` VALUES ('2', 'qinxuening', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 INSERT INTO `tp_member` VALUES ('3', 'cym', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 
@@ -22349,7 +22353,7 @@ CREATE TABLE `tp_ucenter_member` (
 -- ----------------------------
 -- Records of tp_ucenter_member
 -- ----------------------------
-INSERT INTO `tp_ucenter_member` VALUES ('1', 'admin', 'fb518d9f15415f3694db0d14979a8239', '2423859713@qq.com', '', '1472733337', '2130706433', '1482906867', '2130706433', '1472733337', '1');
+INSERT INTO `tp_ucenter_member` VALUES ('1', 'admin', 'fb518d9f15415f3694db0d14979a8239', '2423859713@qq.com', '', '1472733337', '2130706433', '1484190359', '2130706433', '1472733337', '1');
 INSERT INTO `tp_ucenter_member` VALUES ('2', 'qinxuening', '7c611e8fef136e9ae52abaeaca48f5c1', '2423859712@qq.com', '', '1476265461', '2130706433', '0', '0', '1476265461', '1');
 INSERT INTO `tp_ucenter_member` VALUES ('3', 'cym', '7c611e8fef136e9ae52abaeaca48f5c1', '24238597134@qq.com', '', '1476412989', '2130706433', '0', '0', '1476412989', '1');
 

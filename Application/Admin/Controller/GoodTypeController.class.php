@@ -24,7 +24,6 @@ class GoodTypeController extends AdminController {
      * @author qxn
      */
     public function index(){
-        //$list = $this->lists('Good');
     	$fix    = C("DB_PREFIX");
     	$Good = "Good";
     	$Good_type = "Good_type";
@@ -35,7 +34,6 @@ class GoodTypeController extends AdminController {
         Cookie('__forward__',$_SERVER['REQUEST_URI']);
         $this->assign('Model_index','active');
         $this->assign('_list', $list);
-        //print_r($list);
         $this->meta_title = '物品登记';
         $this->display();
     }
@@ -135,11 +133,8 @@ class GoodTypeController extends AdminController {
      * @author qxn
      */
     public function update(){
-       // $res = M('Good_type')->where(array('id'=>I('id')))->save(array('type' => I('type'), 'add_time' => I('add_time')));
     	$res = D('Good_type')->update();
-       // echo M('Good_type')->getLastSql();
     	if(!$res){
-    		echo '1234';
     		$this->error(D('Good_type')->getError());
     	}else{
     		$this->success($res['id']?'更新成功':'新增成功', Cookie('__forward__'));
