@@ -29,7 +29,7 @@ class GuestRoomTypeController extends AdminController{
 		if(empty($id)){
 			$this->error('参数不能为空！');
 		}
-		$FindOne = $this->Guest_room_type->find();
+		$FindOne = $this->Guest_room_type->find($id);
 		$this->assign('Guest_room_type_index','active');
 		$this->assign('info', $FindOne);
 		$this->meta_title = '客房类型编辑';
@@ -62,8 +62,11 @@ class GuestRoomTypeController extends AdminController{
     	}
     }	
 	
-	
-	
+    public function add(){
+    	$this->assign('Guest_room_type_index','active');
+    	$this->meta_title = '新增房型';
+    	$this->display("edit");
+    }	
 	
 	
 	
