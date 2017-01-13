@@ -429,3 +429,32 @@ function get_action_type($type, $all = false){
     }
     return $list[$type];
 }
+
+/**
+ * 获取客房类型
+ * @author qxn
+ * @return Ambigous <\Think\mixed, boolean, string, NULL, multitype:, unknown, mixed, object>
+ */
+function get_guest_room_type(){
+	return M('guest_room_type')->field('id, type_name')->select();
+}
+
+/**
+ * 获取状态
+ * @author qxn
+ * @return Ambigous <\Think\mixed, boolean, string, NULL, multitype:, unknown, mixed, object>
+ */
+function get_state_color(){
+	return M('state_colour')->field('id, state')->select();
+}
+
+
+
+
+
+
+
+
+
+
+

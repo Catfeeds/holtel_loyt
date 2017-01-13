@@ -179,11 +179,35 @@
 									</a>
 								</li>								
 							</ul>
-						</li>						
+						</li>	
+						<li class="{$Guest_Room_Set_active}">
+							<a href="#" class="dropdown-toggle">
+								<i class="icon-cogs"></i>
+								<span class="menu-text"> 客房设置 </span>
+
+								<b class="arrow icon-angle-down"></b>
+							</a>
+
+							<ul class="submenu">
+								<li class="{$Guest_Room_Set_index}">
+									<a href="{:U('GuestRoomSet/index')}">
+										<i class="icon-double-angle-right"></i>
+										客房登记
+									</a>
+								</li>
+								
+								<li class="{$State_colour_index}">
+									<a href="{:U('StateColour/index')}">
+										<i class="icon-double-angle-right"></i>
+										房态项目
+									</a>
+								</li>								
+							</ul>
+						</li>												
 						<li class="{$Database_active}">
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-cloud"></i>
-								<span class="menu-text"> 客房设置 </span>
+								<span class="menu-text"> 数据库管理 </span>
 
 								<b class="arrow icon-angle-down"></b>
 							</a>

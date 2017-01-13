@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2017-01-13 13:40:54
+Date: 2017-01-13 17:56:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -36,46 +36,6 @@ CREATE TABLE `advance_order_slave` (
 -- ----------------------------
 -- Records of advance_order_slave
 -- ----------------------------
-
--- ----------------------------
--- Table structure for guest_room_set
--- ----------------------------
-DROP TABLE IF EXISTS `guest_room_set`;
-CREATE TABLE `guest_room_set` (
-  `Guest_Room_Id` varchar(6) NOT NULL COMMENT '客房编号',
-  `Type_Name` varchar(12) DEFAULT NULL COMMENT '类型名称',
-  `Floor_Name` varchar(12) DEFAULT NULL COMMENT '楼层名称',
-  `Room_Description` varchar(12) DEFAULT NULL COMMENT '客房描述',
-  `State` varchar(12) DEFAULT NULL COMMENT '状态',
-  `Remarks` varchar(12) DEFAULT NULL COMMENT '备注',
-  `Amount_People` varchar(12) DEFAULT NULL COMMENT '额定人数',
-  `Extension_Number` varchar(12) DEFAULT NULL COMMENT '分机号',
-  `Amount_Bed` varchar(255) DEFAULT NULL COMMENT '床数',
-  PRIMARY KEY (`Guest_Room_Id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of guest_room_set
--- ----------------------------
-INSERT INTO `guest_room_set` VALUES ('101', '标准单人间', '1', '有电视，空调', '维修', '', '1', '801', '1');
-INSERT INTO `guest_room_set` VALUES ('102', '标准单人间', '1', '有电视，空调', '入住', '', '1', '802', '1');
-INSERT INTO `guest_room_set` VALUES ('103', '标准单人间', '1', '有电视，空调', '维修', '', '1', '803', '1');
-INSERT INTO `guest_room_set` VALUES ('104', '普通单人间', '1', '有电视', '入住', '', '1', '804', '1');
-INSERT INTO `guest_room_set` VALUES ('105', '普通单人间', '1', '有电视', '清洁', '', '1', '805', '1');
-INSERT INTO `guest_room_set` VALUES ('106', '普通单人间', '1', '有电视', '入住', '', '1', '806', '1');
-INSERT INTO `guest_room_set` VALUES ('107', '普通双人间', '2', '有电视', '清洁', '', '2', '807', '2');
-INSERT INTO `guest_room_set` VALUES ('108', '普通双人间', '2', '有电视', '入住', '', '2', '808', '2');
-INSERT INTO `guest_room_set` VALUES ('109', '普通双人间', '2', '有电视', '空房', '', '2', '809', '2');
-INSERT INTO `guest_room_set` VALUES ('110', '标准双人间', '2', '有电视，空调', '空房', '', '2', '810', '2');
-INSERT INTO `guest_room_set` VALUES ('111', '标准双人间', '2', '有电视，空调', '空房', '', '2', '811', '2');
-INSERT INTO `guest_room_set` VALUES ('112', '标准双人间', '2', '有电视，空调', '空房', '', '2', '812', '2');
-INSERT INTO `guest_room_set` VALUES ('113', '普通三人间', '3', '有电视', '空房', '', '3', '813', '3');
-INSERT INTO `guest_room_set` VALUES ('114', '普通三人间', '3', '有电视', '空房', '', '3', '814', '3');
-INSERT INTO `guest_room_set` VALUES ('115', '普通三人间', '3', '有电视', '空房', '', '3', '815', '3');
-INSERT INTO `guest_room_set` VALUES ('116', '普通三人间', '3', '有电视', '空房', '', '3', '816', '3');
-INSERT INTO `guest_room_set` VALUES ('117', '标准三人间', '3', '有电视，空调', '预订', '', '3', '817', '3');
-INSERT INTO `guest_room_set` VALUES ('118', '标准三人间', '3', '有电视，空调', '换出', '', '3', '818', '3');
-INSERT INTO `guest_room_set` VALUES ('119', '标准三人间', '3', '有电视，空调', '预订', '', '3', '819', '3');
 
 -- ----------------------------
 -- Table structure for mobile
@@ -20986,7 +20946,7 @@ CREATE TABLE `tp_action_log` (
   KEY `action_ip_ix` (`action_ip`),
   KEY `action_id_ix` (`action_id`),
   KEY `user_id_ix` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=262 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表';
+) ENGINE=MyISAM AUTO_INCREMENT=263 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表';
 
 -- ----------------------------
 -- Records of tp_action_log
@@ -21235,6 +21195,7 @@ INSERT INTO `tp_action_log` VALUES ('258', '1', '1', '2130706433', 'member', '1'
 INSERT INTO `tp_action_log` VALUES ('259', '1', '1', '2130706433', 'member', '1', 'admin在2017-01-12 11:05登录了后台', '1', '1484190359');
 INSERT INTO `tp_action_log` VALUES ('260', '1', '1', '2130706433', 'member', '1', 'admin在2017-01-13 09:14登录了后台', '1', '1484270097');
 INSERT INTO `tp_action_log` VALUES ('261', '1', '1', '2130706433', 'member', '1', 'admin在2017-01-13 11:10登录了后台', '1', '1484277009');
+INSERT INTO `tp_action_log` VALUES ('262', '1', '1', '2130706433', 'member', '1', 'admin在2017-01-13 15:17登录了后台', '1', '1484291865');
 
 -- ----------------------------
 -- Table structure for tp_addons
@@ -21927,6 +21888,47 @@ INSERT INTO `tp_good_type` VALUES ('4', '饮料', '2016-12-12 15:12');
 INSERT INTO `tp_good_type` VALUES ('5', '餐类', '2016-12-12 15:15');
 
 -- ----------------------------
+-- Table structure for tp_guest_room_set
+-- ----------------------------
+DROP TABLE IF EXISTS `tp_guest_room_set`;
+CREATE TABLE `tp_guest_room_set` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `guest_room_id` varchar(6) NOT NULL COMMENT '客房编号',
+  `type_name` varchar(12) DEFAULT NULL COMMENT '类型名称',
+  `floor_name` varchar(12) DEFAULT NULL COMMENT '楼层名称',
+  `room_description` varchar(12) DEFAULT NULL COMMENT '客房描述',
+  `state` varchar(12) DEFAULT NULL COMMENT '状态',
+  `remarks` varchar(12) DEFAULT NULL COMMENT '备注',
+  `amount_people` varchar(12) DEFAULT NULL COMMENT '额定人数',
+  `extension_number` varchar(12) DEFAULT NULL COMMENT '分机号',
+  `amount_bed` varchar(255) DEFAULT NULL COMMENT '床数',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tp_guest_room_set
+-- ----------------------------
+INSERT INTO `tp_guest_room_set` VALUES ('1', '101', '1', '1', '有电视，空调', '6', '', '1', '801', '1');
+INSERT INTO `tp_guest_room_set` VALUES ('2', '102', '1', '1', '有电视，空调', '4', '', '1', '802', '1');
+INSERT INTO `tp_guest_room_set` VALUES ('3', '103', '1', '1', '有电视，空调', '6', '', '1', '803', '1');
+INSERT INTO `tp_guest_room_set` VALUES ('4', '104', '4', '1', '有电视', '4', '', '1', '804', '1');
+INSERT INTO `tp_guest_room_set` VALUES ('5', '105', '4', '1', '有电视', '3', '', '1', '805', '1');
+INSERT INTO `tp_guest_room_set` VALUES ('6', '106', '4', '1', '有电视', '4', '', '1', '806', '1');
+INSERT INTO `tp_guest_room_set` VALUES ('7', '107', '6', '2', '有电视', '3', '', '2', '807', '2');
+INSERT INTO `tp_guest_room_set` VALUES ('8', '108', '6', '2', '有电视', '4', '', '2', '808', '2');
+INSERT INTO `tp_guest_room_set` VALUES ('9', '109', '6', '2', '有电视', '2', '', '2', '809', '2');
+INSERT INTO `tp_guest_room_set` VALUES ('10', '110', '3', '2', '有电视，空调', '2', '', '2', '810', '2');
+INSERT INTO `tp_guest_room_set` VALUES ('11', '111', '3', '2', '有电视，空调', '2', '', '2', '811', '2');
+INSERT INTO `tp_guest_room_set` VALUES ('12', '112', '3', '2', '有电视，空调', '2', '', '2', '812', '2');
+INSERT INTO `tp_guest_room_set` VALUES ('13', '113', '5', '3', '有电视', '2', '', '3', '813', '3');
+INSERT INTO `tp_guest_room_set` VALUES ('14', '114', '5', '3', '有电视', '2', '', '3', '814', '3');
+INSERT INTO `tp_guest_room_set` VALUES ('15', '115', '5', '3', '有电视', '2', '', '3', '815', '3');
+INSERT INTO `tp_guest_room_set` VALUES ('16', '116', '5', '3', '有电视', '2', '', '3', '816', '3');
+INSERT INTO `tp_guest_room_set` VALUES ('17', '117', '2', '3', '有电视，空调', '7', '', '3', '817', '3');
+INSERT INTO `tp_guest_room_set` VALUES ('18', '118', '2', '3', '有电视，空调', '1', '', '3', '818', '3');
+INSERT INTO `tp_guest_room_set` VALUES ('19', '119', '2', '3', '有电视，空调', '7', '', '3', '819', '3');
+
+-- ----------------------------
 -- Table structure for tp_guest_room_type
 -- ----------------------------
 DROP TABLE IF EXISTS `tp_guest_room_type`;
@@ -22007,7 +22009,7 @@ CREATE TABLE `tp_member` (
 -- ----------------------------
 -- Records of tp_member
 -- ----------------------------
-INSERT INTO `tp_member` VALUES ('1', 'admin', '0', '0000-00-00', '', '250', '71', '0', '1472733337', '2130706433', '1484277009', '1');
+INSERT INTO `tp_member` VALUES ('1', 'admin', '0', '0000-00-00', '', '250', '72', '0', '1472733337', '2130706433', '1484291865', '1');
 INSERT INTO `tp_member` VALUES ('2', 'qinxuening', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 INSERT INTO `tp_member` VALUES ('3', 'cym', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 
@@ -22281,7 +22283,7 @@ CREATE TABLE `tp_state_colour` (
   `state` varchar(12) NOT NULL COMMENT '状态',
   `colour` varchar(12) DEFAULT NULL COMMENT '颜色',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tp_state_colour
@@ -22357,7 +22359,7 @@ CREATE TABLE `tp_ucenter_member` (
 -- ----------------------------
 -- Records of tp_ucenter_member
 -- ----------------------------
-INSERT INTO `tp_ucenter_member` VALUES ('1', 'admin', 'fb518d9f15415f3694db0d14979a8239', '2423859713@qq.com', '', '1472733337', '2130706433', '1484277009', '2130706433', '1472733337', '1');
+INSERT INTO `tp_ucenter_member` VALUES ('1', 'admin', 'fb518d9f15415f3694db0d14979a8239', '2423859713@qq.com', '', '1472733337', '2130706433', '1484291865', '2130706433', '1472733337', '1');
 INSERT INTO `tp_ucenter_member` VALUES ('2', 'qinxuening', '7c611e8fef136e9ae52abaeaca48f5c1', '2423859712@qq.com', '', '1476265461', '2130706433', '0', '0', '1476265461', '1');
 INSERT INTO `tp_ucenter_member` VALUES ('3', 'cym', '7c611e8fef136e9ae52abaeaca48f5c1', '24238597134@qq.com', '', '1476412989', '2130706433', '0', '0', '1476412989', '1');
 
