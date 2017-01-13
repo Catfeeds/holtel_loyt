@@ -11,16 +11,14 @@ namespace Admin\Model;
 use Think\Model;
 
 /**
- * 房型基础模型
+ * 状态颜色基础模型
  */
-class GuestRoomTypeModel extends Model{
+class StateColourModel extends Model{
 
     /* 自动验证规则 */
     protected $_validate = array(
-        array('type_name', 'require', '类型名称不能为空', self::MUST_VALIDATE , 'regex', self::MODEL_BOTH),
-        array('price', 'require', '价格不能为空', self::MUST_VALIDATE, 'regex', self::MODEL_BOTH),
-    	array('amount_bed', 'require', '床数不能为空', self::MUST_VALIDATE, 'regex', self::MODEL_BOTH),
-    	array('amount_people', 'require', '额定人数不能为空', self::MUST_VALIDATE, 'regex', self::MODEL_BOTH),
+        array('state', 'require', '状态名称不能为空', self::MUST_VALIDATE , 'regex', self::MODEL_BOTH),
+        array('colour', 'require', '颜色不能为空', self::MUST_VALIDATE, 'regex', self::MODEL_BOTH),
     );
 
     /* 自动完成规则 */
@@ -56,7 +54,7 @@ class GuestRoomTypeModel extends Model{
                 return false;
             }
         } else { //更新数据
-            $status = $this->save(); //更新基础内容
+            $status = $this->where(array('id' => $data['id']))->save(); //更新基础内容
             if(false === $status){
                 $this->error = '修改房型出错！';
                 return false;

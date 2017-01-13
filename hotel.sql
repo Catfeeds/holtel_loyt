@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2017-01-12 17:23:32
+Date: 2017-01-13 13:40:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20937,27 +20937,6 @@ INSERT INTO `mobile` VALUES ('20382', '1398020', '1398021', '四川', '内江', 
 INSERT INTO `mobile` VALUES ('20557', '1398780', '1398781', '云南', '楚雄', '878', '云南移动全球通卡');
 
 -- ----------------------------
--- Table structure for state_colour
--- ----------------------------
-DROP TABLE IF EXISTS `state_colour`;
-CREATE TABLE `state_colour` (
-  `State` varchar(12) NOT NULL COMMENT '状态',
-  `Colour` varchar(12) DEFAULT NULL COMMENT '颜色',
-  PRIMARY KEY (`State`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of state_colour
--- ----------------------------
-INSERT INTO `state_colour` VALUES ('换出', '$00FF99CC');
-INSERT INTO `state_colour` VALUES ('空房', '$00669933');
-INSERT INTO `state_colour` VALUES ('清洁', '$000099FF');
-INSERT INTO `state_colour` VALUES ('入住', 'clMaroon');
-INSERT INTO `state_colour` VALUES ('退住', 'clFuchsia');
-INSERT INTO `state_colour` VALUES ('维修', 'clPurple');
-INSERT INTO `state_colour` VALUES ('预订', 'clYellow');
-
--- ----------------------------
 -- Table structure for tp_action
 -- ----------------------------
 DROP TABLE IF EXISTS `tp_action`;
@@ -21007,7 +20986,7 @@ CREATE TABLE `tp_action_log` (
   KEY `action_ip_ix` (`action_ip`),
   KEY `action_id_ix` (`action_id`),
   KEY `user_id_ix` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=260 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表';
+) ENGINE=MyISAM AUTO_INCREMENT=262 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='行为日志表';
 
 -- ----------------------------
 -- Records of tp_action_log
@@ -21254,6 +21233,8 @@ INSERT INTO `tp_action_log` VALUES ('256', '1', '1', '2130706433', 'member', '1'
 INSERT INTO `tp_action_log` VALUES ('257', '1', '1', '2130706433', 'member', '1', 'admin在2016-12-28 14:34登录了后台', '1', '1482906867');
 INSERT INTO `tp_action_log` VALUES ('258', '1', '1', '2130706433', 'member', '1', 'admin在2017-01-11 11:45登录了后台', '1', '1484106330');
 INSERT INTO `tp_action_log` VALUES ('259', '1', '1', '2130706433', 'member', '1', 'admin在2017-01-12 11:05登录了后台', '1', '1484190359');
+INSERT INTO `tp_action_log` VALUES ('260', '1', '1', '2130706433', 'member', '1', 'admin在2017-01-13 09:14登录了后台', '1', '1484270097');
+INSERT INTO `tp_action_log` VALUES ('261', '1', '1', '2130706433', 'member', '1', 'admin在2017-01-13 11:10登录了后台', '1', '1484277009');
 
 -- ----------------------------
 -- Table structure for tp_addons
@@ -21957,7 +21938,7 @@ CREATE TABLE `tp_guest_room_type` (
   `amount_people` varchar(12) DEFAULT NULL COMMENT '额定人数',
   PRIMARY KEY (`id`),
   KEY `type_name` (`type_name`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tp_guest_room_type
@@ -21968,6 +21949,7 @@ INSERT INTO `tp_guest_room_type` VALUES ('3', '标准双人间', '128', '2', '2'
 INSERT INTO `tp_guest_room_type` VALUES ('4', '普通单人间', '68', '1', '1');
 INSERT INTO `tp_guest_room_type` VALUES ('5', '普通三人间', '138', '3', '3');
 INSERT INTO `tp_guest_room_type` VALUES ('6', '普通双人间', '118', '2', '2');
+INSERT INTO `tp_guest_room_type` VALUES ('7', '商务房', '288', '3', '3');
 
 -- ----------------------------
 -- Table structure for tp_hooks
@@ -22025,7 +22007,7 @@ CREATE TABLE `tp_member` (
 -- ----------------------------
 -- Records of tp_member
 -- ----------------------------
-INSERT INTO `tp_member` VALUES ('1', 'admin', '0', '0000-00-00', '', '250', '69', '0', '1472733337', '2130706433', '1484190359', '1');
+INSERT INTO `tp_member` VALUES ('1', 'admin', '0', '0000-00-00', '', '250', '71', '0', '1472733337', '2130706433', '1484277009', '1');
 INSERT INTO `tp_member` VALUES ('2', 'qinxuening', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 INSERT INTO `tp_member` VALUES ('3', 'cym', '0', '0000-00-00', '', '0', '0', '0', '0', '0', '0', '1');
 
@@ -22291,6 +22273,28 @@ INSERT INTO `tp_property_type` VALUES ('7', '家具', '2016-12-28 15:53');
 INSERT INTO `tp_property_type` VALUES ('8', '设备', '2016-12-28 15:53');
 
 -- ----------------------------
+-- Table structure for tp_state_colour
+-- ----------------------------
+DROP TABLE IF EXISTS `tp_state_colour`;
+CREATE TABLE `tp_state_colour` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `state` varchar(12) NOT NULL COMMENT '状态',
+  `colour` varchar(12) DEFAULT NULL COMMENT '颜色',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tp_state_colour
+-- ----------------------------
+INSERT INTO `tp_state_colour` VALUES ('1', '换出', '#884280');
+INSERT INTO `tp_state_colour` VALUES ('2', '空房', '#c0c0c0');
+INSERT INTO `tp_state_colour` VALUES ('3', '清洁', '#800000');
+INSERT INTO `tp_state_colour` VALUES ('4', '入住', '#ef7354');
+INSERT INTO `tp_state_colour` VALUES ('5', '退住', '#808000');
+INSERT INTO `tp_state_colour` VALUES ('6', '维修', '#8080ff');
+INSERT INTO `tp_state_colour` VALUES ('7', '预订', '#ff8080');
+
+-- ----------------------------
 -- Table structure for tp_ucenter_admin
 -- ----------------------------
 DROP TABLE IF EXISTS `tp_ucenter_admin`;
@@ -22353,7 +22357,7 @@ CREATE TABLE `tp_ucenter_member` (
 -- ----------------------------
 -- Records of tp_ucenter_member
 -- ----------------------------
-INSERT INTO `tp_ucenter_member` VALUES ('1', 'admin', 'fb518d9f15415f3694db0d14979a8239', '2423859713@qq.com', '', '1472733337', '2130706433', '1484190359', '2130706433', '1472733337', '1');
+INSERT INTO `tp_ucenter_member` VALUES ('1', 'admin', 'fb518d9f15415f3694db0d14979a8239', '2423859713@qq.com', '', '1472733337', '2130706433', '1484277009', '2130706433', '1472733337', '1');
 INSERT INTO `tp_ucenter_member` VALUES ('2', 'qinxuening', '7c611e8fef136e9ae52abaeaca48f5c1', '2423859712@qq.com', '', '1476265461', '2130706433', '0', '0', '1476265461', '1');
 INSERT INTO `tp_ucenter_member` VALUES ('3', 'cym', '7c611e8fef136e9ae52abaeaca48f5c1', '24238597134@qq.com', '', '1476412989', '2130706433', '0', '0', '1476412989', '1');
 
